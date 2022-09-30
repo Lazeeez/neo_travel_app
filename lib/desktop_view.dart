@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'data.dart';
 import 'utils.dart';
+import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 
 void main() => runApp(const MyApp());
 
@@ -28,6 +31,39 @@ class DesktopView extends StatefulWidget {
 }
 
 class _DesktopViewState extends State<DesktopView> {
+
+  var _postsJson = [];
+
+  // fetchAlbumWithoutAwait() async {
+  // var header = {
+  //     "Content-Type": "application/json",
+  //     "Authorization": "token bfc3d0749b9c2ec:7aa9ebb7a30c606"
+  //   };
+
+  //   // always take care of authorization
+  // var client = http.Client();
+
+  // var url = Uri.parse('https://doha-matrix.elasticrun.in/api/method/matrix.api.angular_backend.get_completed_trips?fields=%5B%22*%22%5D&filters=%5B%5D&order_by=modified%20desc&limit_start=0&limit_page_length=5&employee=EMP-0264&doctype=Travel%20and%20Lodging%20Request');
+
+  // // var url = Uri.parse('https://doha-matrix.elasticrun.in/api/resource/Travel%20and%20Lodging%20Request/TL/EMP-0264/Dec21/0012');
+
+  // var response = await client.get(url, headers: header);
+  // // print(jsonDecode(response.body));
+  // var result = (jsonDecode(response.body));
+
+  // print(result['message']);
+
+  // setState(() {
+  //   _postsJson = result['message'];
+  // });                            
+  // }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   fetchAlbumWithoutAwait();
+  // }
+
   var travel_and_lodging_id = 'TL/EMP-0264/Sep20/0017';
   var reporting_manager = 'Rakesh Virendra Singh';
   var reporting_manager_id = 'EMP-0264';
@@ -813,7 +849,7 @@ class _DesktopViewState extends State<DesktopView> {
                                       ),
                                     ),
                                   ]),
-                                  for (var user in allUsers)
+                                  for (var user in users)
                                     Row(children: [
                                       Expanded(
                                         child: Container(

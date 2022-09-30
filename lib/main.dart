@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'desktop_view.dart';
 import 'mobile_view.dart';
 import 'data.dart';
+import 'drawer.dart';
+// import 'claim_status_screen.dart';
+import 'claim_status_mobile.dart';
+// import 'saved_claims_screen.dart';
+// import 'test.dart';
 
 void main() => runApp(const MyApp());
 
@@ -35,12 +40,15 @@ class _ScreenState extends State<Screen> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        if (constraints.maxWidth > 800) {
+        return ClaimStatus(title: 'test');
+        // return Home();
+        // return MobileView(title: 'mobile');
+        // if (constraints.maxWidth > 800) {
           
-          return DesktopView(title: 'desktop');
-        } else {
-          return MobileView(title: 'mobile');
-        }
+        //   return DesktopView(title: 'desktop');
+        // } else {
+        //   return MobileView(title: 'mobile');
+        // }
       },
     );
   }
