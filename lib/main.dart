@@ -6,8 +6,10 @@ import 'data.dart';
 import 'drawer.dart';
 // import 'claim_status_screen.dart';
 import 'claim_status_mobile.dart';
+// import 'testsupport.dart';
 // import 'saved_claims_screen.dart';
 // import 'test.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 void main() => runApp(const MyApp());
 
@@ -16,9 +18,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return OverlaySupport.global(child: MaterialApp(
       title: 'Flutter Demo',
       home: Screen(),
+    )
     );
   }
 }

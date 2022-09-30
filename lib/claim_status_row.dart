@@ -18,7 +18,7 @@ class oneRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Material( child: Row(
       children: [
         // for(var request in Approved_requests)
         Expanded(
@@ -528,6 +528,7 @@ class oneRow extends StatelessWidget {
           ],
         ))
       ],
+    )
     );
   }
 }
