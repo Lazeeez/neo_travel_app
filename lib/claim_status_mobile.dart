@@ -585,6 +585,8 @@ class _ClaimStatusState extends State<ClaimStatus>
     var offset = Tween<Offset>(begin: const Offset(1.0, 0.0), end: Offset.zero)
         .animate(controller);
 
+    var screen_height = MediaQuery.of(context).size.height;
+
     return Material(
         child: DefaultTabController(
             initialIndex: 1,
@@ -626,6 +628,97 @@ class _ClaimStatusState extends State<ClaimStatus>
                             ElevatedButton(
                                 onPressed: () {
                                   showOverlay((context, t) {
+                                    // add padding
+                                    return Padding(
+                                      // set padding according to the screen_height
+                                      padding: EdgeInsets.only(
+                                          top: screen_height * 0.11),
+                                      // padding: const EdgeInsets.only(top: 
+                                      child: Container(
+                                        padding: const EdgeInsets.only(
+                                            left: 70),
+                                        color: Color.lerp(Colors.transparent,
+                                            Colors.black54, t),
+                                        child: FractionalTranslation(
+                                          translation: Offset.lerp(
+                                              const Offset(1, 0),
+                                              const Offset(0, 0),
+                                              t)!,
+                                          child: Container(
+                                              color: const Color.fromARGB(255,250,250,250),
+                                              child: SingleChildScrollView(
+                                                  child: Column(
+                                                children: [
+                                                  const Padding(
+                                                      padding: EdgeInsets.only(
+                                                          right: 220)),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      
+                                                      RichText(
+                                                        text: TextSpan(
+                                                          children: [
+                                                            WidgetSpan(
+                                                              child: Container(
+                                                                padding: const EdgeInsets
+                                                                        .only(
+                                                                    left: 30),
+                                                                child: const DefaultTextStyle (
+                                                                  style: TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontSize:
+                                                                            18,
+                                                                            fontWeight: FontWeight.bold),
+                                                                  child: Text(
+                                                                    'Saved Claims',
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .left),
+                                                                )
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        padding: const EdgeInsets
+                                                                .only(
+                                                            right: 10),
+                                                        child: ElevatedButton(
+                                                          onPressed: () {
+                                                            OverlaySupportEntry
+                                                                    .of(context)!
+                                                                .dismiss();
+                                                          },
+                                                          style: ElevatedButton.styleFrom(
+                                                          // disable shadows
+                                                          shadowColor: Colors.transparent,
+                                                          backgroundColor: const Color.fromARGB(255,250,250,250),),
+                                                          child: const Icon(
+                                                              Icons.close,
+                                                              color: Color.fromRGBO(124, 128, 134, 1)
+                                                              )
+                                                              // change color
+                                                              
+                                                              ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                  const Padding(
+                                                      padding:
+                                                          EdgeInsets.only(
+                                                              right: 250)),
+                                                  for (var request in users)
+                                                    oneRow(request)
+                                                ],
+                                              ))),
+                                        ))
+                                      
+                                    );
                                     return Container(
                                         padding: const EdgeInsets.only(
                                             left: 70, top: 105),
@@ -634,7 +727,7 @@ class _ClaimStatusState extends State<ClaimStatus>
                                         child: FractionalTranslation(
                                           translation: Offset.lerp(
                                               const Offset(1, 0),
-                                              const Offset(0, 0.1),
+                                              const Offset(0, 0),
                                               t)!,
                                           child: Container(
                                               color: const Color.fromARGB(255,250,250,250),
