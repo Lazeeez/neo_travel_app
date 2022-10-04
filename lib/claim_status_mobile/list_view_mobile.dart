@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'data.dart';
-import 'utils.dart';
+import '../data.dart';
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 
 void main() => runApp(const MyApp());
@@ -135,6 +133,21 @@ class _MobileViewState extends State<MobileView> {
                   Expanded(
                     child: Row(
                       children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shadowColor: Colors.transparent,
+                            backgroundColor: Colors.transparent,
+                            
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(32.0),
+                            ),
+                          ),
+                          onPressed: () {
+                            // go back to previous page
+                            Navigator.pop(context);
+                          }, 
+                          child: Icon(Icons.arrow_back_ios_new, color: Colors.black)
+                        ),
                         Expanded(
                           child: Container(
                             padding: const EdgeInsets.only(
@@ -155,13 +168,14 @@ class _MobileViewState extends State<MobileView> {
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 20),
+                                                  fontSize: 18),
                                               textAlign: TextAlign.left),
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
+                                
                               ],
                             ),
                           ),

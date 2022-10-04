@@ -1,13 +1,13 @@
 // create a class
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'mobile_view.dart';
+import '../mobile_view.dart';
 
 // create a class that accepts a List and print it
-class oneRow extends StatelessWidget {
+class claimStatusRowMobile extends StatelessWidget {
   var request;
 
-  oneRow(this.request, {super.key});
+  claimStatusRowMobile(this.request, {super.key});
 
   String daysBetween(DateTime from, DateTime to) {
     from = DateTime(from.year, from.month, from.day);
@@ -71,7 +71,7 @@ class oneRow extends StatelessWidget {
                                           padding: EdgeInsets.only(
                                               top: 25, bottom: 25)),
                                       Text(request.expenseClaimID,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.blue, fontSize: 12),
                                           textAlign: TextAlign.right),
                                     ],
@@ -108,7 +108,7 @@ class oneRow extends StatelessWidget {
                                           padding: EdgeInsets.only(
                                               top: 25, bottom: 25)),
                                       Text(request.travelAndLodgingID,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.blue, fontSize: 12),
                                           textAlign: TextAlign.right),
                                     ],
@@ -395,9 +395,124 @@ class oneRow extends StatelessWidget {
                         //     Column (
                         //       children: [
 
-                        // if (request.claimType == "Lodging")
+                        if (request.claimType == "Lodging")
+                        Container(
+                          padding: const EdgeInsets.only(
+                              left: 14, top: 0, right: 10),
+                          child: Container(
+                            // set min height
+                            height: 60,
 
-                        // if (request.claimType == "Travel")
+                            decoration: BoxDecoration(
+                              color: const Color.fromRGBO(239,246,255,1),
+                              borderRadius: BorderRadius.circular(100),
+                              // borderRadius:
+                              //     BorderRadius.circular(100),
+                            ),
+                            // padding: const EdgeInsets.only(
+                            //     left: 0, top: 10),
+                            // margin: const EdgeInsets.only(
+                            //     left: 0, top: 10),
+                            child: Row(
+                              children: [
+                                const Padding(
+                                    padding: EdgeInsets.only(
+                                  left: 8,
+                                )),
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      WidgetSpan(
+                                          child: Container(
+                                        padding: const EdgeInsets.all(8),
+                                        // height: ,
+
+                                        decoration: BoxDecoration(
+                                          color: const Color.fromARGB(
+                                              250, 250, 250, 255),
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                        ),
+                                        // color: Colors.white,
+                                        // padding:
+                                        //     const EdgeInsets
+                                        //             .only(
+                                        //         bottom: 0,
+                                        //         right: 0,
+                                        //         left: 20),
+                                        child: const Icon(Icons.apartment,
+                                            color: Color.fromRGBO(
+                                                75,149,247,1)),
+                                      )),
+                                    ],
+                                  ),
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          WidgetSpan(
+                                            child: Container(
+                                              padding: const EdgeInsets.only(
+                                                  right: 10,
+                                                  left: 10,
+                                                  bottom: 5,
+                                                  top: 13),
+                                              child: Text(
+                                                  "${DateFormat('yMMMd').format(DateTime.parse(request.fromDate))} - ${DateFormat('yMMMd').format(DateTime.parse(request.toDate))}",
+                                                  style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 12),
+                                                  textAlign: TextAlign.left),
+                                            ),
+                                          ),
+                                          WidgetSpan(
+                                            child: Container(
+                                              padding: const EdgeInsets.only(
+                                                  top: 13,
+                                                  right: 25,
+                                                  bottom: 5),
+                                              child: Text(
+                                                  "(${DateFormat('E').format(DateTime.parse(request.fromDate))} - ${DateFormat('E').format(DateTime.parse(request.toDate))})",
+                                                  style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 12),
+                                                  textAlign: TextAlign.left),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          WidgetSpan(
+                                            child: Container(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 8, left: 10),
+                                              child: Text(
+                                                  "${daysBetween((DateTime.parse(request.fromDate)), (DateTime.parse(request.toDate)))} days",
+                                                  style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 12),
+                                                  textAlign: TextAlign.left),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        if (request.claimType == "Travel")
                         Container(
                           padding: const EdgeInsets.only(
                               left: 14, top: 0, right: 10),

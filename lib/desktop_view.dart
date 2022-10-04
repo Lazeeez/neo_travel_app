@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'data.dart';
-import 'utils.dart';
-import 'dart:convert';
-import 'dart:io';
-import 'package:http/http.dart' as http;
 
 void main() => runApp(const MyApp());
 

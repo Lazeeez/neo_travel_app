@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'claim_status_data.dart';
-import 'package:intl/intl.dart';
-import 'claim_status_mobile.dart';
-import 'claim_status_row.dart';
-import 'drawer.dart';
-import 'utils.dart';
+import 'claim_status_row_mobile.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 void main() => runApp(const MyApp());
@@ -245,7 +241,7 @@ class _ClaimStatusState extends State<ClaimStatus>
                                                           EdgeInsets.only(
                                                               right: 250)),
                                                   for (var request in users)
-                                                    oneRow(request)
+                                                    claimStatusRowMobile(request)
                                                 ],
                                               ))),
                                         ));
@@ -394,25 +390,25 @@ class _ClaimStatusState extends State<ClaimStatus>
                             SingleChildScrollView(
                                 child: Column(
                               children: [
-                                for (var test in allUsers) oneRow(test)
+                                for (var test in allUsers) claimStatusRowMobile(test)
                               ],
                             )),
                             SingleChildScrollView(
                                 child: Column(
                               children: [
-                                for (var test in Pending_requests) oneRow(test)
+                                for (var test in Pending_requests) claimStatusRowMobile(test)
                               ],
                             )),
                             SingleChildScrollView(
                                 child: Column(
                               children: [
-                                for (var test in Rejected_requests) oneRow(test)
+                                for (var test in Rejected_requests) claimStatusRowMobile(test)
                               ],
                             )),
                             SingleChildScrollView(
                                 child: Column(
                               children: [
-                                for (var test in Approved_requests) oneRow(test)
+                                for (var test in Approved_requests) claimStatusRowMobile(test)
                               ],
                             )),
                           ],
