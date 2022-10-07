@@ -1,7 +1,7 @@
 // create a class
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'mobile_view.dart';
+import 'list_view_mobile.dart';
 import 'dart:math' as math;
 
 // create a class that accepts a List and print it

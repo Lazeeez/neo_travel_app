@@ -1,7 +1,7 @@
 // create a class
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'mobile_view.dart';
+import '../claim_status_mobile/list_view_mobile.dart';
 import 'dart:math' as math;
 
 // create a class that accepts a List and print it
@@ -58,24 +58,24 @@ class savedClaimRow extends StatelessWidget {
                           Expanded(
                             child: Text(request.travelAndLodgingID,
                                 style:
-                                    TextStyle(color: Colors.blue, fontSize: 12),
+                                    const TextStyle(color: Colors.blue, fontSize: 12),
                                 textAlign: TextAlign.left),
                           ),
-                          Padding(padding: const EdgeInsets.only(top: 60)),
+                          const Padding(padding: EdgeInsets.only(top: 60)),
                           Container(
                               padding: const EdgeInsets.only(
                                   left: 12, right: 12, top: 7, bottom: 7),
                               decoration: BoxDecoration(
-                                color: Color.fromRGBO(255, 238, 244, 1),
+                                color: const Color.fromRGBO(255, 238, 244, 1),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Row(
                                 children: [
-                                  Icon(Icons.save_alt_outlined,
+                                  const Icon(Icons.save_alt_outlined,
                                       color: Color.fromRGBO(234, 78, 136, 1),
                                       size: 15),
-                                  Padding(padding: EdgeInsets.only(left: 5)),
-                                  Text('Saved',
+                                  const Padding(padding: EdgeInsets.only(left: 5)),
+                                  const Text('Saved',
                                       style: TextStyle(
                                           color:
                                               Color.fromRGBO(234, 78, 136, 1),
@@ -83,7 +83,7 @@ class savedClaimRow extends StatelessWidget {
                                       textAlign: TextAlign.right),
                                 ],
                               )),
-                          Padding(padding: const EdgeInsets.only(right: 15)),
+                          const Padding(padding: EdgeInsets.only(right: 15)),
                         ],
                       ),
                       const Padding(padding: EdgeInsets.only(top: 70)),
@@ -178,18 +178,18 @@ class savedClaimRow extends StatelessWidget {
                         children: [
                           Container(
                             padding: const EdgeInsets.all(10),
-                              color: Color.fromRGBO(245, 245, 245, 1),
+                              color: const Color.fromRGBO(245, 245, 245, 1),
                               child: Column(
                                 children: [
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Icon(Icons.apartment,
+                                      const Icon(Icons.apartment,
                                           color: Color.fromARGB(
                                               255, 150, 150, 150),
                                           size: 22),
-                                      Text("Lodging Claims",
+                                      const Text("Lodging Claims",
                                           style: TextStyle(
                                               color:
                                                   Color.fromARGB(255, 0, 0, 0),
@@ -205,15 +205,15 @@ class savedClaimRow extends StatelessWidget {
                                         
                                         child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                            primary: Color.fromRGBO(250, 138, 35, 1),
+                                            primary: const Color.fromRGBO(250, 138, 35, 1),
                                             shape: const CircleBorder(),
                                             padding: const EdgeInsets.all(0),
                                           ),
                                           onPressed: () {print('dope');},
-                                          child: Icon(Icons.edit, color: Color.fromARGB(255, 245, 245, 245), size: 15),
+                                          child: const Icon(Icons.edit, color: Color.fromARGB(255, 245, 245, 245), size: 15),
                                           ),
                                         ),
-                                        Padding(padding: const EdgeInsets.only(right: 10)),
+                                        const Padding(padding: EdgeInsets.only(right: 10)),
                                       Container(
                                         height: 30,
                                         
@@ -221,7 +221,7 @@ class savedClaimRow extends StatelessWidget {
                                             
                                           onPressed:() {},
                                           style: ElevatedButton.styleFrom(
-                                            primary: Color.fromRGBO(255, 255, 255, 1)
+                                            primary: const Color.fromRGBO(255, 255, 255, 1)
                                           ),
                                           child: 
                                           RichText(
@@ -231,14 +231,14 @@ class savedClaimRow extends StatelessWidget {
                                                 WidgetSpan(
                                                   child: Container(
                                                     padding: const EdgeInsets.only(right: 5, bottom: 0),
-                                                    child: Icon(
+                                                    child: const Icon(
                                                     Icons.attachment,
                                                     size: 17,
                                                     color: Color.fromRGBO(75, 149, 247, 1),
                                                     ),
                                                   ),
                                                 ),
-                                                WidgetSpan(
+                                                const WidgetSpan(
                                                   child: Text('View', style: TextStyle(color: Color.fromRGBO(75, 149, 247, 1), fontSize: 14),),
                                                 ),
                                                 
@@ -251,7 +251,7 @@ class savedClaimRow extends StatelessWidget {
                                     
                                     ],
                                   ),
-                                  Divider(
+                                  const Divider(
                                     color: Color.fromRGBO(245, 245, 245, 255),
                                     thickness: 0,
                                   ),
@@ -264,7 +264,7 @@ class savedClaimRow extends StatelessWidget {
                                           
                                           children: [
                                             RichText(
-                                              text: TextSpan(
+                                              text: const TextSpan(
                                                 children: [
                                                   WidgetSpan(
                                                     child: Text('Expense Type', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)), textAlign: TextAlign.left),
@@ -272,9 +272,9 @@ class savedClaimRow extends StatelessWidget {
                                                 ],
                                               ),
                                             ),
-                                            Padding(padding: const EdgeInsets.only(bottom: 5)),
+                                            const Padding(padding: EdgeInsets.only(bottom: 5)),
                                             RichText(
-                                              text: TextSpan(
+                                              text: const TextSpan(
                                                 children: [
                                                   WidgetSpan(
                                                     child: Text('Boarding & Lodging', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontWeight: FontWeight.bold), textAlign: TextAlign.left),
@@ -285,13 +285,13 @@ class savedClaimRow extends StatelessWidget {
                                           ]
                                         )
                                       ),
-                                      Padding(padding: const EdgeInsets.only(right: 10)),
+                                      const Padding(padding: EdgeInsets.only(right: 10)),
                                       Expanded(
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             RichText(
-                                              text: TextSpan(
+                                              text: const TextSpan(
                                                 children: [
                                                   WidgetSpan(
                                                     child: Text('Expense Place', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)), textAlign: TextAlign.left),
@@ -299,9 +299,9 @@ class savedClaimRow extends StatelessWidget {
                                                 ],
                                               ),
                                             ),
-                                            Padding(padding: const EdgeInsets.only(bottom: 5)),
+                                            const Padding(padding: EdgeInsets.only(bottom: 5)),
                                             RichText(
-                                              text: TextSpan(
+                                              text: const TextSpan(
                                                 children: [
                                                   WidgetSpan(
                                                     child: Text('Akkaraipatti', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontWeight: FontWeight.bold), textAlign: TextAlign.left),
@@ -314,7 +314,7 @@ class savedClaimRow extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  Divider(
+                                  const Divider(
                                     color: Color.fromRGBO(245, 245, 245, 255),
                                     thickness: 0,
                                   ),
@@ -325,7 +325,7 @@ class savedClaimRow extends StatelessWidget {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             RichText(
-                                              text: TextSpan(
+                                              text: const TextSpan(
                                                 children: [
                                                   WidgetSpan(
                                                     child: Text('From Date', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)), textAlign: TextAlign.left),
@@ -333,9 +333,9 @@ class savedClaimRow extends StatelessWidget {
                                                 ],
                                               ),
                                             ),
-                                            Padding(padding: const EdgeInsets.only(bottom: 5)),
+                                            const Padding(padding: EdgeInsets.only(bottom: 5)),
                                             RichText(
-                                              text: TextSpan(
+                                              text: const TextSpan(
                                                 children: [
                                                   WidgetSpan(
                                                     child: Text('13 Aug 2021', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontWeight: FontWeight.bold), textAlign: TextAlign.left),
@@ -346,13 +346,13 @@ class savedClaimRow extends StatelessWidget {
                                           ]
                                         )
                                       ),
-                                      Padding(padding: const EdgeInsets.only(right: 10)),
+                                      const Padding(padding: EdgeInsets.only(right: 10)),
                                       Expanded(
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             RichText(
-                                              text: TextSpan(
+                                              text: const TextSpan(
                                                 children: [
                                                   WidgetSpan(
                                                     child: Text('To Date', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)), textAlign: TextAlign.left),
@@ -360,9 +360,9 @@ class savedClaimRow extends StatelessWidget {
                                                 ],
                                               ),
                                             ),
-                                            Padding(padding: const EdgeInsets.only(bottom: 5)),
+                                            const Padding(padding: EdgeInsets.only(bottom: 5)),
                                             RichText(
-                                              text: TextSpan(
+                                              text: const TextSpan(
                                                 children: [
                                                   WidgetSpan(
                                                     child: Text('15 Aug 2021', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontWeight: FontWeight.bold), textAlign: TextAlign.left),
@@ -375,7 +375,7 @@ class savedClaimRow extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  Divider(
+                                  const Divider(
                                     color: Color.fromRGBO(245, 245, 245, 255),
                                     thickness: 0,
                                   ),
@@ -386,7 +386,7 @@ class savedClaimRow extends StatelessWidget {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             RichText(
-                                              text: TextSpan(
+                                              text: const TextSpan(
                                                 children: [
                                                   WidgetSpan(
                                                     child: Text('Expense Date', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)), textAlign: TextAlign.left),
@@ -394,9 +394,9 @@ class savedClaimRow extends StatelessWidget {
                                                 ],
                                               ),
                                             ),
-                                            Padding(padding: const EdgeInsets.only(bottom: 5)),
+                                            const Padding(padding: EdgeInsets.only(bottom: 5)),
                                             RichText(
-                                              text: TextSpan(
+                                              text: const TextSpan(
                                                 children: [
                                                   WidgetSpan(
                                                     child: Text('2 Aug 2021', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontWeight: FontWeight.bold), textAlign: TextAlign.left),
@@ -407,13 +407,13 @@ class savedClaimRow extends StatelessWidget {
                                           ]
                                         )
                                       ),
-                                      Padding(padding: const EdgeInsets.only(right: 10)),
+                                      const Padding(padding: EdgeInsets.only(right: 10)),
                                       Expanded(
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             RichText(
-                                              text: TextSpan(
+                                              text: const TextSpan(
                                                 children: [
                                                   WidgetSpan(
                                                     child: Text('Claim Amount', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)), textAlign: TextAlign.left),
@@ -421,9 +421,9 @@ class savedClaimRow extends StatelessWidget {
                                                 ],
                                               ),
                                             ),
-                                            Padding(padding: const EdgeInsets.only(bottom: 5)),
+                                            const Padding(padding: EdgeInsets.only(bottom: 5)),
                                             RichText(
-                                              text: TextSpan(
+                                              text: const TextSpan(
                                                 children: [
                                                   WidgetSpan(
                                                     child: Text('₹ 3511', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontWeight: FontWeight.bold), textAlign: TextAlign.left),
@@ -530,8 +530,8 @@ class savedClaimRow extends StatelessWidget {
                                                   left: 7,
                                                   bottom: 5,
                                                   top: 13),
-                                              child: Text("0",
-                                                  style: const TextStyle(
+                                              child: const Text("0",
+                                                  style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -551,8 +551,8 @@ class savedClaimRow extends StatelessWidget {
                                                   bottom: 8,
                                                   left: 7,
                                                   right: 15),
-                                              child: Text("Travel Count",
-                                                  style: const TextStyle(
+                                              child: const Text("Travel Count",
+                                                  style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 12),
                                                   textAlign: TextAlign.left),
@@ -630,8 +630,8 @@ class savedClaimRow extends StatelessWidget {
                                                   left: 7,
                                                   bottom: 5,
                                                   top: 13),
-                                              child: Text("1",
-                                                  style: const TextStyle(
+                                              child: const Text("1",
+                                                  style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -651,8 +651,8 @@ class savedClaimRow extends StatelessWidget {
                                                   bottom: 8,
                                                   left: 7,
                                                   right: 15),
-                                              child: Text("Lodging Count",
-                                                  style: const TextStyle(
+                                              child: const Text("Lodging Count",
+                                                  style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 12),
                                                   textAlign: TextAlign.left),

@@ -1,11 +1,15 @@
 // create a class
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../mobile_view.dart';
+import 'package:overlay_support/overlay_support.dart';
+import 'expense_claims_row_mobile.dart';
+import 'list_view_mobile.dart';
+import 'claim_status_data.dart';
 
 // create a class that accepts a List and print it
 class claimStatusRowMobile extends StatelessWidget {
   var request;
+  List users = allUsers;
 
   claimStatusRowMobile(this.request, {super.key});
 
@@ -59,7 +63,271 @@ class claimStatusRowMobile extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showOverlay((context, t) {
+                                      // add padding
+                                      return Padding(
+                                          // set padding as much as appbar height
+                                          padding: EdgeInsets.only(
+                                              top: MediaQuery.of(context)
+                                                      .padding
+                                                      .top +
+                                                  kToolbarHeight),
+                                          // padding: EdgeInsets.only(
+                                          //     top: screen_height * 0.11),
+                                          // padding: const EdgeInsets.only(top:
+                                          child: Container(
+                                              padding:
+                                                  const EdgeInsets.only(left: 70),
+                                              color: Color.lerp(
+                                                  Colors.transparent,
+                                                  Colors.black54,
+                                                  t),
+                                              child: FractionalTranslation(
+                                                translation: Offset.lerp(
+                                                    const Offset(1, 0),
+                                                    const Offset(0, 0),
+                                                    t)!,
+                                                child: Container(
+                                                    color: const Color.fromARGB(
+                                                        255, 250, 250, 250),
+                                                    child: SingleChildScrollView(
+                                                        child: Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        const Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    right: 220)),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          // crossAxisAlignment: CrossAxisAlignment.center,
+                                                          children: [
+                                                            RichText(
+                                                              text: TextSpan(
+                                                                children: [
+                                                                  WidgetSpan(
+                                                                    child:
+                                                                        Container(
+                                                                            padding: const EdgeInsets.only(
+                                                                                left:
+                                                                                    30,
+                                                                                top:
+                                                                                    25),
+                                                                            child:
+                                                                                const DefaultTextStyle(
+                                                                              style: TextStyle(
+                                                                                  color: Colors.black,
+                                                                                  fontSize: 18,
+                                                                                  fontWeight: FontWeight.bold),
+                                                                              child:
+                                                                                  Text('Expense Claims', textAlign: TextAlign.left),
+                                                                            )),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      right: 10,
+                                                                      top: 25),
+                                                              child:
+                                                                  ElevatedButton(
+                                                                      onPressed:
+                                                                          () {
+                                                                        OverlaySupportEntry.of(
+                                                                                context)!
+                                                                            .dismiss();
+                                                                      },
+                                                                      style: ElevatedButton
+                                                                          .styleFrom(
+                                                                        // disable shadows
+                                                                        shadowColor:
+                                                                            Colors
+                                                                                .transparent,
+                                                                        backgroundColor: const Color
+                                                                                .fromARGB(
+                                                                            255,
+                                                                            250,
+                                                                            250,
+                                                                            250),
+                                                                      ),
+                                                                      child: const Icon(
+                                                                          Icons
+                                                                              .close,
+                                                                          color: Color.fromRGBO(
+                                                                              124,
+                                                                              128,
+                                                                              134,
+                                                                              1))
+                                                                      // change color
+
+                                                                      ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        const Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    right: 250)
+                                                        ),
+
+
+                                                        Row(
+                                                          children: [
+                                                            Padding(padding: const EdgeInsets.only(left: 30)),
+                                                            Container(
+                                                              decoration: BoxDecoration(
+                                                                color: Color.fromARGB(218, 225, 225, 225),
+                                                                borderRadius: BorderRadius.circular(8),
+                                                              ),
+                                                              
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .all(10),
+                                                              child: Icon(Icons.location_on_outlined, color: Color.fromARGB(121, 48, 48, 48), size: 20),
+                                                            ),
+                                                            // Padding(padding: const EdgeInsets.only(left: 10)),
+                                                            Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                              children: [
+                                                                DefaultTextStyle(
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                  child: RichText(
+                                                                    text: TextSpan(
+                                                                      children: [
+                                                                        WidgetSpan(
+                                                                          child: Container(
+                                                                            padding: const EdgeInsets.only(
+                                                                                left: 10,
+                                                                                top: 10,
+                                                                                bottom: 5),
+                                                                            child: Text(request.from_city,
+                                                                                style: TextStyle(
+                                                                                    color: Color.fromARGB(
+                                                                                        255, 0, 0, 0),
+                                                                                    fontSize: 12),
+                                                                                textAlign: TextAlign.left),
+                                                                          ),
+                                                                        ),
+                                                                        if (request.to_city != '')
+                                                                        WidgetSpan(
+                                                                          child: Container(
+                                                                            padding: const EdgeInsets.only(
+                                                                                
+                                                                                top: 10,
+                                                                                bottom: 5),
+                                                                            child: Text(" - " + request.to_city,
+                                                                                style: TextStyle(
+                                                                                    color: Color.fromARGB(
+                                                                                        255, 0, 0, 0),
+                                                                                    fontSize: 12),
+                                                                                textAlign: TextAlign.left),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Padding(padding: const EdgeInsets.only(bottom: 5)),
+                                                                DefaultTextStyle(
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                  child: RichText(
+                                                                    text: TextSpan(
+                                                                      children: [
+                                                                        WidgetSpan(
+                                                                          child: Container(
+                                                                            padding: const EdgeInsets.only(
+                                                                                
+                                                                                left: 10),
+                                                                            child: Text(
+                                                                                "${DateFormat('yMMMd').format(DateTime.parse(request.fromDate))} - ${DateFormat('yMMMd').format(DateTime.parse(request.toDate))}",
+                                                                                style: const TextStyle(
+                                                                                    color: Colors.black,
+                                                                                    fontWeight:
+                                                                                        FontWeight.bold,
+                                                                                    fontSize: 12),
+                                                                                textAlign: TextAlign.left),
+                                                                          ),
+                                                                        ),
+                                                                        WidgetSpan(
+                                                                          child: Container(
+                                                                            
+                                                                            child: Text(
+                                                                                "(${DateFormat('E').format(DateTime.parse(request.fromDate))} - ${DateFormat('E').format(DateTime.parse(request.toDate))})",
+                                                                                style: const TextStyle(
+                                                                                    color: Colors.black,
+                                                                                    fontSize: 12),
+                                                                                textAlign: TextAlign.left),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Padding(padding: const EdgeInsets.only(bottom: 10)),
+                                                              ],
+                                                            )
+                                                          ],
+                                                          
+                                                        ),
+                                                        RichText(
+                                                          text: TextSpan(
+                                                            children: [
+                                                              WidgetSpan(
+                                                                child:
+                                                                  Container(
+                                                                      padding: const EdgeInsets.only(
+                                                                          left: 30,
+                                                                          top:
+                                                                              15),
+                                                                      child:
+                                                                          const DefaultTextStyle(
+                                                                        style: TextStyle(
+                                                                            color: Colors.black,
+                                                                            fontSize: 18,
+                                                                            fontWeight: FontWeight.bold),
+                                                                        child:
+                                                                            Text('Claim History', textAlign: TextAlign.left),
+                                                                      )),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+
+
+
+                                                        const Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    right: 250)
+                                                        ),
+
+                                                        for (var request in users)
+                                                          expenseClaimRow(request)
+                                                      ],
+                                                    ))),
+                                              )));
+                                    }, duration: Duration.zero);
+                                  },
                                   style: ElevatedButton.styleFrom(
                                       // disable shadows
                                       shadowColor: Colors.transparent,
@@ -139,7 +407,17 @@ class claimStatusRowMobile extends StatelessWidget {
                                     children: [
                                       WidgetSpan(
                                         child: Container(
-                                          child: Text(request.city,
+                                          child: Text(request.from_city,
+                                              style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 28),
+                                              textAlign: TextAlign.left),
+                                        ),
+                                      ),
+                                      if (request.to_city != '')
+                                      WidgetSpan(
+                                        child: Container(
+                                          child: Text(' - ' + request.to_city,
                                               style: const TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 28),

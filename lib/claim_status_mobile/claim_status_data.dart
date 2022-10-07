@@ -7,7 +7,9 @@ class user {
   final String claimType;
   final String expenseClaimID;
   final String travelAndLodgingID;
-  final String city;
+  final String from_city;
+  final String to_city;
+  final String approver;
   final String fromDate;
   final String toDate;
   final String status;
@@ -20,7 +22,9 @@ class user {
     required this.claimType,
     required this.expenseClaimID,
     required this.travelAndLodgingID,
-    required this.city,
+    required this.from_city,
+    required this.to_city,
+    required this.approver,
     required this.fromDate,
     required this.toDate,
     required this.status,
@@ -68,7 +72,9 @@ final allUsers = <user> [
     claimType: 'Travel',
     expenseClaimID: 'EXP-00001',
     travelAndLodgingID: 'TRAV-00001',
-    city: 'Mumbai',
+    from_city: 'Mumbai',
+    to_city: 'Delhi',
+    approver: 'John Doe',
     fromDate: '2021-05-01',
     toDate: '2021-05-05',
     status: 'Pending',
@@ -81,7 +87,9 @@ final allUsers = <user> [
     claimType: 'Lodging',
     expenseClaimID: 'EXP-00002',
     travelAndLodgingID: 'TRAV-00002',
-    city: 'Dubai',
+    from_city: 'Dubai',
+    to_city: 'Mumbai',
+    approver: 'John Doe',
     fromDate: '2021-05-01',
     toDate: '2021-05-05',
     status: 'Approved',
@@ -94,7 +102,9 @@ final allUsers = <user> [
     claimType: 'Lodging',
     expenseClaimID: 'EXP-00003',
     travelAndLodgingID: 'TRAV-00003',
-    city: 'Dublin',
+    from_city: 'Dublin',
+    to_city: 'LA',
+    approver: 'John Cena',
     fromDate: '2021-05-01',
     toDate: '2021-05-05',
     status: 'Rejected',
@@ -107,7 +117,9 @@ final allUsers = <user> [
     claimType: 'Travel',
     expenseClaimID: 'EXP-00004',
     travelAndLodgingID: 'TRAV-00004',
-    city: 'Moscow',
+    from_city: 'Moscow',
+    to_city:'Siberia',
+    approver: 'Johnny Bravo',
     fromDate: '2021-05-01',
     toDate: '2021-05-05',
     status: 'Approved',
@@ -120,7 +132,9 @@ final allUsers = <user> [
     claimType: 'Travel',
     expenseClaimID: 'EXP-00005',
     travelAndLodgingID: 'TRAV-00005',
-    city: 'Monaco',
+    from_city: 'Monaco',
+    to_city: '',
+    approver: 'John Mchannon',
     fromDate: '2021-05-01',
     toDate: '2021-05-05',
     status: 'Rejected',
@@ -133,7 +147,9 @@ final allUsers = <user> [
     claimType: 'Lodging',
     expenseClaimID: 'EXP-00006',
     travelAndLodgingID: 'TRAV-00006',
-    city: 'London',
+    from_city: 'London',
+    to_city: '',
+    approver: 'Joe Mama',
     fromDate: '2021-05-01',
     toDate: '2021-05-05',
     status: 'Approved',
@@ -146,7 +162,9 @@ final allUsers = <user> [
     claimType: 'Travel',
     expenseClaimID: 'EXP-00007',
     travelAndLodgingID: 'TRAV-00007',
-    city: 'Paris',
+    from_city: 'Paris',
+    to_city: 'Nice',
+    approver: 'Alison Burgers',
     fromDate: '2021-05-01',
     toDate: '2021-05-05',
     status: 'Approved',

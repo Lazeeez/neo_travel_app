@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:neo_travel_app/mobile_view.dart';
+import 'package:neo_travel_app/claim_status_mobile/claim_status_mobile.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

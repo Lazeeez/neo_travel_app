@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'claim_status_data.dart';
+import '../claim_status_mobile/claim_status_data.dart';
 import 'package:intl/intl.dart';
-import 'claim_status_mobile.dart';
+import '../claim_status_mobile/claim_status_mobile.dart';
 // import 'utils.dart';
 
 void main() => runApp(const MyApp());
@@ -1349,7 +1349,17 @@ class _ClaimStatusState extends State<ClaimStatus> {
                 Container(
                   padding: const EdgeInsets.only(right: 40),
                   margin: const EdgeInsets.only(left: 20.0),
-                  child: Text(user.city,
+                  child: Text(user.from_city,
+                      style: const TextStyle(
+                          color: Color.fromARGB(255, 59, 59, 59),
+                          fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left),
+                ),
+                if (user.to_city != '')
+                Container(
+                  padding: const EdgeInsets.only(right: 40),
+                  margin: const EdgeInsets.only(left: 20.0),
+                  child: Text(' - ' + user.to_city,
                       style: const TextStyle(
                           color: Color.fromARGB(255, 59, 59, 59),
                           fontWeight: FontWeight.bold),

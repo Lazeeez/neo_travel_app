@@ -3,20 +3,6 @@ import '../data.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      home: MobileView(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
 class MobileView extends StatefulWidget {
   final String title;
   MobileView({Key? key, required this.title}) : super(key: key);
@@ -29,8 +15,6 @@ class MobileView extends StatefulWidget {
 }
 
 initState() {
-  
-  
   // fetch data from data.dart
   // users = allUsers;
 }
@@ -41,29 +25,29 @@ initState() {
 // }
 
 class _MobileViewState extends State<MobileView> {
-
   var _postsJson = [];
 
   fetchAlbumWithoutAwait() async {
-  var header = {
+    var header = {
       "Content-Type": "application/json",
       "Authorization": "token bfc3d0749b9c2ec:3d2986856cca23b"
     };
-  var client = http.Client();
+    var client = http.Client();
 
-  var url = Uri.parse('https://doha-matrix.elasticrun.in/api/method/matrix.api.angular_backend.get_completed_trips?fields=%5B%22*%22%5D&filters=%5B%5D&order_by=modified%20desc&limit_start=0&limit_page_length=5&employee=EMP-0264&doctype=Travel%20and%20Lodging%20Request');
+    var url = Uri.parse(
+        'https://doha-matrix.elasticrun.in/api/method/matrix.api.angular_backend.get_completed_trips?fields=%5B%22*%22%5D&filters=%5B%5D&order_by=modified%20desc&limit_start=0&limit_page_length=5&employee=EMP-0264&doctype=Travel%20and%20Lodging%20Request');
 
-  // var url = Uri.parse('https://doha-matrix.elasticrun.in/api/resource/Travel%20and%20Lodging%20Request/TL/EMP-0264/Dec21/0012');
+    // var url = Uri.parse('https://doha-matrix.elasticrun.in/api/resource/Travel%20and%20Lodging%20Request/TL/EMP-0264/Dec21/0012');
 
-  var response = await client.get(url, headers: header);
-  // print(jsonDecode(response.body));
-  var result = (jsonDecode(response.body));
+    var response = await client.get(url, headers: header);
+    // print(jsonDecode(response.body));
+    var result = (jsonDecode(response.body));
 
-  print(result['message']);
+    print(result['message']);
 
-  setState(() {
-    _postsJson = result['message'];
-  });                            
+    setState(() {
+      _postsJson = result['message'];
+    });
   }
 
   @override
@@ -83,7 +67,6 @@ class _MobileViewState extends State<MobileView> {
   // List data_from_api = getData();
   // convert data_from_api to List
   // List usersApi = nip.toList();
-
 
   // var data
   final List<user> users = allUsers;
@@ -134,20 +117,19 @@ class _MobileViewState extends State<MobileView> {
                     child: Row(
                       children: [
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shadowColor: Colors.transparent,
-                            backgroundColor: Colors.transparent,
-                            
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(32.0),
+                            style: ElevatedButton.styleFrom(
+                              shadowColor: Colors.transparent,
+                              backgroundColor: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(32.0),
+                              ),
                             ),
-                          ),
-                          onPressed: () {
-                            // go back to previous page
-                            Navigator.pop(context);
-                          }, 
-                          child: Icon(Icons.arrow_back_ios_new, color: Colors.black)
-                        ),
+                            onPressed: () {
+                              // go back to previous page
+                              Navigator.pop(context);
+                            },
+                            child: Icon(Icons.arrow_back_ios_new,
+                                color: Colors.black)),
                         Expanded(
                           child: Container(
                             padding: const EdgeInsets.only(
@@ -175,7 +157,6 @@ class _MobileViewState extends State<MobileView> {
                                     ],
                                   ),
                                 ),
-                                
                               ],
                             ),
                           ),
@@ -203,9 +184,7 @@ class _MobileViewState extends State<MobileView> {
                                 children: [
                                   // add button to the right
                                   ElevatedButton(
-                                    onPressed: (
-                                      
-                                    ) {
+                                    onPressed: () {
                                       print(_postsJson);
                                     },
                                     style: ElevatedButton.styleFrom(
@@ -228,7 +207,8 @@ class _MobileViewState extends State<MobileView> {
                                             padding: EdgeInsets.only(left: 10)),
                                         Icon(
                                           Icons.attachment_outlined,
-                                          color: Color.fromARGB(255, 139, 139, 139),
+                                          color: Color.fromARGB(
+                                              255, 139, 139, 139),
                                         ),
                                       ],
                                     ),
@@ -256,7 +236,8 @@ class _MobileViewState extends State<MobileView> {
                                       WidgetSpan(
                                         child: IconButton(
                                           icon: const Icon(Icons.location_pin),
-                                          color: const Color.fromARGB(255, 139, 139, 139),
+                                          color: const Color.fromARGB(
+                                              255, 139, 139, 139),
                                           onPressed: () {},
                                         ),
                                       ),
@@ -266,7 +247,8 @@ class _MobileViewState extends State<MobileView> {
                                               const EdgeInsets.only(bottom: 11),
                                           child: const Text('Travel Lodging',
                                               style: TextStyle(
-                                                  color: Color.fromARGB(255, 139, 139, 139),
+                                                  color: Color.fromARGB(
+                                                      255, 139, 139, 139),
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 16),
                                               textAlign: TextAlign.left),
@@ -332,7 +314,8 @@ class _MobileViewState extends State<MobileView> {
                                       WidgetSpan(
                                         child: IconButton(
                                           icon: const Icon(
-                                            color: Color.fromARGB(255, 139, 139, 139),
+                                              color: Color.fromARGB(
+                                                  255, 139, 139, 139),
                                               Icons.account_circle_outlined),
                                           onPressed: () {},
                                         ),
@@ -343,7 +326,8 @@ class _MobileViewState extends State<MobileView> {
                                               const EdgeInsets.only(bottom: 10),
                                           child: Text('$reporting_manager_id',
                                               style: const TextStyle(
-                                                  color: Color.fromARGB(255, 139, 139, 139),
+                                                  color: Color.fromARGB(
+                                                      255, 139, 139, 139),
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 16),
                                               textAlign: TextAlign.left),
@@ -422,7 +406,8 @@ class _MobileViewState extends State<MobileView> {
                                 children: const [
                                   Text('Project & Cost Center',
                                       style: TextStyle(
-                                          color: Color.fromARGB(255, 139, 139, 139),
+                                          color: Color.fromARGB(
+                                              255, 139, 139, 139),
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16),
                                       textAlign: TextAlign.left),
@@ -507,7 +492,8 @@ class _MobileViewState extends State<MobileView> {
                                         children: const [
                                           Text('Request Date',
                                               style: TextStyle(
-                                                  color: Color.fromARGB(255, 139, 139, 139),
+                                                  color: Color.fromARGB(
+                                                      255, 139, 139, 139),
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 16),
                                               textAlign: TextAlign.left),
@@ -603,7 +589,8 @@ class _MobileViewState extends State<MobileView> {
                                         children: const [
                                           Text('Designation',
                                               style: TextStyle(
-                                                  color: Color.fromARGB(255, 139, 139, 139),
+                                                  color: Color.fromARGB(
+                                                      255, 139, 139, 139),
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 16),
                                               textAlign: TextAlign.left),
@@ -699,7 +686,8 @@ class _MobileViewState extends State<MobileView> {
                                         children: const [
                                           Text('Base Location',
                                               style: TextStyle(
-                                                  color: Color.fromARGB(255, 139, 139, 139),
+                                                  color: Color.fromARGB(
+                                                      255, 139, 139, 139),
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 16),
                                               textAlign: TextAlign.left),
@@ -748,6 +736,1372 @@ class _MobileViewState extends State<MobileView> {
                   ),
                   const Padding(padding: EdgeInsets.only(left: 20)),
                 ]),
+                Row(
+                  children: [
+                    Expanded(
+                        child: Column(
+                      children: [
+                        ExpansionTile(
+                          initiallyExpanded: false,
+                            title: Row(children: [
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        margin: const EdgeInsets.only(
+                                            left: 5, top: 10),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  WidgetSpan(
+                                                    child: Container(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              bottom: 0),
+                                                      child: const Text(
+                                                          "Overlapping Travel Requests",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 19),
+                                                          textAlign:
+                                                              TextAlign.left),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Padding(padding: EdgeInsets.only(left: 20)),
+                            ]),
+                            children: [
+                              for (var user in _postsJson)
+                                Row(children: [
+                                  Padding(padding: const EdgeInsets.only(left: 20)),
+                                  Expanded(
+                                    child: Container(
+                                      
+                                      decoration: const BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color.fromARGB(
+                                                  255, 195, 195, 195),
+                                              blurRadius: 3.0,
+                                              spreadRadius: 2,
+                                            ),
+                                          ],
+                                          color: Color.fromARGB(
+                                              250, 250, 250, 250),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(8))),
+                                      child: Column(
+                                        children: [
+                                          
+                                          Padding(padding: EdgeInsets.only(top: 15)),
+                                          Row(children: [
+                                            Expanded(
+                                              child: Container(
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: const [
+                                                            Text(
+                                                                'Travel Request',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            139,
+                                                                            139,
+                                                                            139),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                                user[
+                                                                    'travel_purpose'],
+                                                                style: const TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .right),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ]),
+                                          const Divider(
+                                            height: 20,
+                                            thickness: 1,
+                                            indent: 20,
+                                            endIndent: 20,
+                                            color: Color.fromARGB(
+                                                255, 195, 195, 195),
+                                          ),
+                                          Row(children: [
+                                            Expanded(
+                                              child: Container(
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: const [
+                                                            Text(
+                                                                'Travel Date',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            139,
+                                                                            139,
+                                                                            139),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                                user[
+                                                                    'travel_purpose'],
+                                                                style: const TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .right),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ]),
+                                          const Divider(
+                                            height: 20,
+                                            thickness: 1,
+                                            indent: 20,
+                                            endIndent: 20,
+                                            color: Color.fromARGB(
+                                                255, 195, 195, 195),
+                                          ),
+                                          Row(children: [
+                                            Expanded(
+                                              child: Container(
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: const [
+                                                            Text(
+                                                                'From (City)',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            139,
+                                                                            139,
+                                                                            139),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                                user[
+                                                                    'sharing_employee_1'],
+                                                                style: const TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .right),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ]),
+                                          const Divider(
+                                            height: 20,
+                                            thickness: 1,
+                                            indent: 20,
+                                            endIndent: 20,
+                                            color: Color.fromARGB(
+                                                255, 195, 195, 195),
+                                          ),
+                                          Row(children: [
+                                            Expanded(
+                                              child: Container(
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: const [
+                                                            Text(
+                                                                'To (City)',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            139,
+                                                                            139,
+                                                                            139),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                                user[
+                                                                    'sharing_employee_2'],
+                                                                style: const TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .right),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ]),
+                                          
+                                          const Padding(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 10)),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(padding: const EdgeInsets.only(right: 20)),
+                                  const Padding(
+                                      padding: EdgeInsets.only(bottom: 400)),
+                                ]
+                              ),
+
+                              for (var user in _postsJson)
+                                Row(children: [
+                                  Padding(padding: const EdgeInsets.only(left: 20)),
+                                  Expanded(
+                                    child: Container(
+                                      
+                                      decoration: const BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color.fromARGB(
+                                                  255, 195, 195, 195),
+                                              blurRadius: 3.0,
+                                              spreadRadius: 2,
+                                            ),
+                                          ],
+                                          color: Color.fromARGB(
+                                              250, 250, 250, 250),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(8))),
+                                      child: Column(
+                                        children: [
+                                          
+                                          Padding(padding: EdgeInsets.only(top: 15)),
+                                          Row(children: [
+                                            Expanded(
+                                              child: Container(
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: const [
+                                                            Text(
+                                                                'Lodging Requests',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            139,
+                                                                            139,
+                                                                            139),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                                user[
+                                                                    'travel_purpose'],
+                                                                style: const TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .right),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ]),
+                                          const Divider(
+                                            height: 20,
+                                            thickness: 1,
+                                            indent: 20,
+                                            endIndent: 20,
+                                            color: Color.fromARGB(
+                                                255, 195, 195, 195),
+                                          ),
+                                          Row(children: [
+                                            Expanded(
+                                              child: Container(
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: const [
+                                                            Text(
+                                                                'From Date',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            139,
+                                                                            139,
+                                                                            139),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                                user[
+                                                                    'travel_purpose'],
+                                                                style: const TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .right),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ]),
+                                          const Divider(
+                                            height: 20,
+                                            thickness: 1,
+                                            indent: 20,
+                                            endIndent: 20,
+                                            color: Color.fromARGB(
+                                                255, 195, 195, 195),
+                                          ),
+                                          Row(children: [
+                                            Expanded(
+                                              child: Container(
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: const [
+                                                            Text(
+                                                                'To Date',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            139,
+                                                                            139,
+                                                                            139),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                                user[
+                                                                    'sharing_employee_1'],
+                                                                style: const TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .right),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ]),
+                                          const Divider(
+                                            height: 20,
+                                            thickness: 1,
+                                            indent: 20,
+                                            endIndent: 20,
+                                            color: Color.fromARGB(
+                                                255, 195, 195, 195),
+                                          ),
+                                          Row(children: [
+                                            Expanded(
+                                              child: Container(
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: const [
+                                                            Text(
+                                                                'City',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            139,
+                                                                            139,
+                                                                            139),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                                user[
+                                                                    'sharing_employee_2'],
+                                                                style: const TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .right),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ]),
+                                          
+                                          const Padding(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 10)),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(padding: const EdgeInsets.only(right: 20)),
+                                  const Padding(
+                                      padding: EdgeInsets.only(bottom: 400)),
+                                ]),
+
+
+                            ]),
+                            ExpansionTile(
+                          initiallyExpanded: false,
+                            title: Row(children: [
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        margin: const EdgeInsets.only(
+                                            left: 5, top: 10),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  WidgetSpan(
+                                                    child: Container(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              bottom: 0),
+                                                      child: const Text(
+                                                          "Overlapping Lodging Requests",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 19),
+                                                          textAlign:
+                                                              TextAlign.left),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Padding(padding: EdgeInsets.only(left: 20)),
+                            ]),
+                            children: [
+                              for (var user in _postsJson)
+                                Row(children: [
+                                  Padding(padding: const EdgeInsets.only(left: 20)),
+                                  Expanded(
+                                    child: Container(
+                                      
+                                      decoration: const BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color.fromARGB(
+                                                  255, 195, 195, 195),
+                                              blurRadius: 3.0,
+                                              spreadRadius: 2,
+                                            ),
+                                          ],
+                                          color: Color.fromARGB(
+                                              250, 250, 250, 250),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(8))),
+                                      child: Column(
+                                        children: [
+                                          
+                                          Padding(padding: EdgeInsets.only(top: 15)),
+                                          Row(children: [
+                                            Expanded(
+                                              child: Container(
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: const [
+                                                            Text(
+                                                                'Lodging Requests',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            139,
+                                                                            139,
+                                                                            139),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                                user[
+                                                                    'travel_purpose'],
+                                                                style: const TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .right),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ]),
+                                          const Divider(
+                                            height: 20,
+                                            thickness: 1,
+                                            indent: 20,
+                                            endIndent: 20,
+                                            color: Color.fromARGB(
+                                                255, 195, 195, 195),
+                                          ),
+                                          Row(children: [
+                                            Expanded(
+                                              child: Container(
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: const [
+                                                            Text(
+                                                                'City',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            139,
+                                                                            139,
+                                                                            139),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                                user[
+                                                                    'travel_purpose'],
+                                                                style: const TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .right),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ]),
+                                          const Divider(
+                                            height: 20,
+                                            thickness: 1,
+                                            indent: 20,
+                                            endIndent: 20,
+                                            color: Color.fromARGB(
+                                                255, 195, 195, 195),
+                                          ),
+                                          Row(children: [
+                                            Expanded(
+                                              child: Container(
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: const [
+                                                            Text(
+                                                                'From Date',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            139,
+                                                                            139,
+                                                                            139),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                                user[
+                                                                    'sharing_employee_1'],
+                                                                style: const TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .right),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ]),
+                                          const Divider(
+                                            height: 20,
+                                            thickness: 1,
+                                            indent: 20,
+                                            endIndent: 20,
+                                            color: Color.fromARGB(
+                                                255, 195, 195, 195),
+                                          ),
+                                          Row(children: [
+                                            Expanded(
+                                              child: Container(
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: const [
+                                                            Text(
+                                                                'To Date',
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            139,
+                                                                            139,
+                                                                            139),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                                user[
+                                                                    'sharing_employee_2'],
+                                                                style: const TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        17),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .right),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ]),
+                                          
+                                          const Padding(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 10)),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(padding: const EdgeInsets.only(right: 20)),
+                                  const Padding(
+                                      padding: EdgeInsets.only(bottom: 400)),
+                                ]),
+
+
+                            ])
+                      ],
+                    ))
+                  ],
+                ),
+                // Divider(
+                //   height: 20,
+                //   thickness: 1,
+                //   indent: 20,
+                //   endIndent: 20,
+                //   color: const Color.fromARGB(255, 195, 195, 195),
+                
+                // ),
                 Row(children: [
                   Expanded(
                     child: Row(
@@ -803,718 +2157,741 @@ class _MobileViewState extends State<MobileView> {
                               Column(
                                 children: [
                                   for (var user in _postsJson)
-                                  Row(
-                                    children: [
-                                      
-                                    Expanded(
-                                      child: Container(
-                                        decoration: const BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color.fromARGB(255, 195, 195, 195),
-                                              blurRadius: 3.0,
-                                              
-                                              spreadRadius: 2,
-                                              ),
-                                          ],
-                                            
-                                            color: Color.fromARGB(
-                                                250, 250, 250, 250),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(8))),
-                                        child: Column(
-                                          children: [
-                                            // CARD START
-                                            
-                                            Row(children: [
-                                              Expanded(
-                                                child: Container(
-                                                  child: Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                          ),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 10,
-                                                                  top: 10,
-                                                                  bottom: 10),
-                                                          margin:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 10,
-                                                                  top: 10,
-                                                                  bottom: 5),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                  user['city'],
-                                                                  style: const TextStyle(
-                                                                      color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              0,
-                                                                              0,
-                                                                              0),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          18),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left),
-                                                            ],
+                                    Row(children: [
+                                      Expanded(
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Color.fromARGB(
+                                                      255, 195, 195, 195),
+                                                  blurRadius: 3.0,
+                                                  spreadRadius: 2,
+                                                ),
+                                              ],
+                                              color: Color.fromARGB(
+                                                  250, 250, 250, 250),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(8))),
+                                          child: Column(
+                                            children: [
+                                              // CARD START
+
+                                              Row(children: [
+                                                Expanded(
+                                                  child: Container(
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 10,
+                                                                    top: 10,
+                                                                    bottom: 10),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 10,
+                                                                    top: 10,
+                                                                    bottom: 5),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                    user[
+                                                                        'city'],
+                                                                    style: const TextStyle(
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            18),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .left),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
+                                                        Expanded(
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    right: 10,
+                                                                    left: 10,
+                                                                    top: 10,
+                                                                    bottom: 5),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    right: 10,
+                                                                    left: 10,
+                                                                    top: 10,
+                                                                    bottom: 5),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                ElevatedButton(
+                                                                  onPressed:
+                                                                      () {},
+                                                                  style: ElevatedButton.styleFrom(
+                                                                      backgroundColor: const Color
+                                                                              .fromARGB(
+                                                                          190,
+                                                                          255,
+                                                                          225,
+                                                                          126)),
+                                                                  child: Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Expanded(
+                                                                          child:
+                                                                              Column(
+                                                                        children: [
+                                                                          const Padding(
+                                                                              padding: EdgeInsets.only(top: 0, bottom: 0)),
+                                                                          Text(
+                                                                              user['travel_request_status'],
+                                                                              style: const TextStyle(color: Color.fromARGB(255, 114, 86, 0), fontWeight: FontWeight.bold, fontSize: 17),
+                                                                              textAlign: TextAlign.center),
+                                                                          const Padding(
+                                                                              padding: EdgeInsets.only(left: 10)),
+                                                                        ],
+                                                                      ))
+                                                                    ],
+                                                                  ),
+                                                                )
+                                                                // Text(
+                                                                //     user.lodgingRequestStatus,
+                                                                //     style: TextStyle(
+                                                                //         color: Color
+                                                                //             .fromARGB(
+                                                                //                 255,
+                                                                //                 0,
+                                                                //                 0,
+                                                                //                 0),
+                                                                //         fontWeight:
+                                                                //             FontWeight
+                                                                //                 .bold,
+                                                                //         fontSize:
+                                                                //             20),
+                                                                //     textAlign:
+                                                                //         TextAlign
+                                                                //             .left),
+                                                              ],
+                                                            ),
                                                           ),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  right: 10,
-                                                                  left: 10,
-                                                                  top: 10,
-                                                                  bottom: 5),
-                                                          margin:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  right: 10,
-                                                                  left: 10,
-                                                                  top: 10,
-                                                                  bottom: 5),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              ElevatedButton(
-                                                                onPressed: () {},
-                                                                style: ElevatedButton.styleFrom(
-                                                                    backgroundColor: const Color.fromARGB(190, 255, 225, 126)),
-                                                                child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment.center,
-                                                                  children: [
-                                                                    Expanded(
-                                                                      child: Column(children: [
-                                                                    const Padding(
-                                                                        padding: EdgeInsets.only(
-                                                                            top: 0, bottom: 0)),
-                                                                    Text(user['travel_request_status'],
-                                                                        style: const TextStyle(
-                                                                            color: Color.fromARGB(255, 114, 86, 0),
-                                                                            fontWeight: FontWeight.bold,
-                                                                            fontSize: 17),
-                                                                        textAlign: TextAlign.center),
-                                                                    const Padding(
-                                                                        padding: EdgeInsets.only(left: 10)),
-                                                                        ],)
-                                                                    )
-                                                                  ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ]),
+                                              Row(children: [
+                                                Expanded(
+                                                  child: Container(
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 10,
+                                                                    top: 0,
+                                                                    bottom: 10),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 10,
+                                                                    top: 0,
+                                                                    bottom: 10),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    children: [
+                                                                      WidgetSpan(
+                                                                        child:
+                                                                            Container(
+                                                                          padding:
+                                                                              const EdgeInsets.only(bottom: 14),
+                                                                          child: Text(
+                                                                              user['from_date'],
+                                                                              style: const TextStyle(color: Color.fromARGB(255, 139, 139, 139), fontWeight: FontWeight.bold, fontSize: 16),
+                                                                              textAlign: TextAlign.left),
+                                                                        ),
+                                                                      ),
+                                                                      WidgetSpan(
+                                                                        child:
+                                                                            IconButton(
+                                                                          icon: const Icon(
+                                                                              color: Color.fromARGB(255, 139, 139, 139),
+                                                                              Icons.arrow_forward),
+                                                                          onPressed:
+                                                                              () {},
+                                                                        ),
+                                                                      ),
+                                                                      WidgetSpan(
+                                                                        child:
+                                                                            Container(
+                                                                          padding:
+                                                                              const EdgeInsets.only(bottom: 14),
+                                                                          child: Text(
+                                                                              user['to_date'],
+                                                                              style: const TextStyle(color: Color.fromARGB(255, 139, 139, 139), fontWeight: FontWeight.bold, fontSize: 16),
+                                                                              textAlign: TextAlign.left),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
                                                                 ),
-                                                              )
-                                                              // Text(
-                                                              //     user.lodgingRequestStatus,
-                                                              //     style: TextStyle(
-                                                              //         color: Color
-                                                              //             .fromARGB(
-                                                              //                 255,
-                                                              //                 0,
-                                                              //                 0,
-                                                              //                 0),
-                                                              //         fontWeight:
-                                                              //             FontWeight
-                                                              //                 .bold,
-                                                              //         fontSize:
-                                                              //             20),
-                                                              //     textAlign:
-                                                              //         TextAlign
-                                                              //             .left),
-                                                            ],
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
+                                              ]),
+                                              Row(children: [
+                                                Expanded(
+                                                  child: Container(
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: const [
+                                                                Text(
+                                                                    'Travel Purpose',
+                                                                    style: TextStyle(
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            139,
+                                                                            139,
+                                                                            139),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            17),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .left),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                Text(
+                                                                    user[
+                                                                        'travel_purpose'],
+                                                                    style: const TextStyle(
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            17),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .right),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ]),
+                                              const Divider(
+                                                height: 20,
+                                                thickness: 1,
+                                                indent: 20,
+                                                endIndent: 20,
+                                                color: Color.fromARGB(
+                                                    255, 195, 195, 195),
                                               ),
-                                            ]),
-                                            Row(children: [
-                                              Expanded(
-                                                child: Container(
-                                                  child: Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                          ),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 10,
-                                                                  top: 0,
-                                                                  bottom: 10),
-                                                          margin:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 10,
-                                                                  top: 0,
-                                                                  bottom: 10),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              RichText(
-                                                                text: TextSpan(
-                                                                  children: [
-                                                                    WidgetSpan(
-                                                                      child:
-                                                                          Container(
-                                                                        padding:
-                                                                            const EdgeInsets.only(bottom: 14),
-                                                                        child: Text(
-                                                                            user['from_date'],
-                                                                            style: const TextStyle(
-                                                                                color: Color.fromARGB(255, 139, 139, 139),
-                                                                                fontWeight: FontWeight.bold,
-                                                                                fontSize: 16),
-                                                                            textAlign: TextAlign.left),
-                                                                      ),
-                                                                    ),
-                                                                    WidgetSpan(
-                                                                      child:
-                                                                          IconButton(
-                                                                        icon: const Icon(
-                                                                          color: Color.fromARGB(255, 139, 139, 139),
-                                                                            Icons.arrow_forward),
-                                                                        onPressed:
-                                                                            () {},
-                                                                      ),
-                                                                    ),
-                                                                    WidgetSpan(
-                                                                      child:
-                                                                          Container(
-                                                                        padding:
-                                                                            const EdgeInsets.only(bottom: 14),
-                                                                        child: Text(
-                                                                            user['to_date'],
-                                                                            style: const TextStyle(
-                                                                                color: Color.fromARGB(255, 139, 139, 139),
-                                                                                fontWeight: FontWeight.bold,
-                                                                                fontSize: 16),
-                                                                            textAlign: TextAlign.left),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ],
+                                              Row(children: [
+                                                Expanded(
+                                                  child: Container(
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: const [
+                                                                Text(
+                                                                    'Other Travel Purpose',
+                                                                    style: TextStyle(
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            139,
+                                                                            139,
+                                                                            139),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            17),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .left),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                        Expanded(
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                Text(
+                                                                    user[
+                                                                        'travel_purpose'],
+                                                                    style: const TextStyle(
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            17),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .right),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
+                                              ]),
+                                              const Divider(
+                                                height: 20,
+                                                thickness: 1,
+                                                indent: 20,
+                                                endIndent: 20,
+                                                color: Color.fromARGB(
+                                                    255, 195, 195, 195),
                                               ),
-                                            ]),
-                                            Row(children: [
-                                              Expanded(
-                                                child: Container(
-                                                  child: Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                          ),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          margin:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: const [
-                                                              Text(
-                                                                  'Travel Purpose',
-                                                                  style: TextStyle(
-                                                                      color: Color.fromARGB(255, 139, 139, 139),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          17),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                          ),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          margin:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                  user['travel_purpose'],
-                                                                  style: const TextStyle(
-                                                                      color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              0,
-                                                                              0,
-                                                                              0),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          17),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .right),
-                                                            ],
+                                              Row(children: [
+                                                Expanded(
+                                                  child: Container(
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: const [
+                                                                Text(
+                                                                    'Sharing Employee 1',
+                                                                    style: TextStyle(
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            139,
+                                                                            139,
+                                                                            139),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            17),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .left),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                        Expanded(
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                Text(
+                                                                    user[
+                                                                        'sharing_employee_1'],
+                                                                    style: const TextStyle(
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            17),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .right),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
+                                              ]),
+                                              const Divider(
+                                                height: 20,
+                                                thickness: 1,
+                                                indent: 20,
+                                                endIndent: 20,
+                                                color: Color.fromARGB(
+                                                    255, 195, 195, 195),
                                               ),
-                                            ]),
-                                            const Divider(
-                                              height: 20,
-                                              thickness: 1,
-                                              indent: 20,
-                                              endIndent: 20,
-                                              color: Color.fromARGB(255, 195, 195, 195),
-                                            ),
-                                            Row(children: [
-                                              Expanded(
-                                                child: Container(
-                                                  child: Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                          ),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          margin:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: const [
-                                                              Text(
-                                                                  'Other Travel Purpose',
-                                                                  style: TextStyle(
-                                                                      color: Color.fromARGB(255, 139, 139, 139),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          17),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left),
-                                                            ],
+                                              Row(children: [
+                                                Expanded(
+                                                  child: Container(
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: const [
+                                                                Text(
+                                                                    'Sharing Employee 2',
+                                                                    style: TextStyle(
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            139,
+                                                                            139,
+                                                                            139),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            17),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .left),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                          ),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          margin:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(user['travel_purpose'],
-                                                                  style: const TextStyle(
-                                                                      color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              0,
-                                                                              0,
-                                                                              0),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          17),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .right),
-                                                            ],
+                                                        Expanded(
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                Text(
+                                                                    user[
+                                                                        'sharing_employee_2'],
+                                                                    style: const TextStyle(
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            17),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .right),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
+                                              ]),
+                                              const Divider(
+                                                height: 20,
+                                                thickness: 1,
+                                                indent: 20,
+                                                endIndent: 20,
+                                                color: Color.fromARGB(
+                                                    255, 195, 195, 195),
                                               ),
-                                            ]),
-                                            const Divider(
-                                              height: 20,
-                                              thickness: 1,
-                                              indent: 20,
-                                              endIndent: 20,
-                                              color: Color.fromARGB(255, 195, 195, 195),
-                                            ),
-                                            Row(children: [
-                                              Expanded(
-                                                child: Container(
-                                                  child: Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                          ),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          margin:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: const [
-                                                              Text(
-                                                                  'Sharing Employee 1',
-                                                                  style: TextStyle(
-                                                                      color: Color.fromARGB(255, 139, 139, 139),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          17),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left),
-                                                            ],
+                                              Row(children: [
+                                                Expanded(
+                                                  child: Container(
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: const [
+                                                                Text(
+                                                                    'Other Details',
+                                                                    style: TextStyle(
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            139,
+                                                                            139,
+                                                                            139),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            17),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .left),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                          ),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          margin:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                  user['sharing_employee_1'],
-                                                                  style: const TextStyle(
-                                                                      color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              0,
-                                                                              0,
-                                                                              0),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          17),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .right),
-                                                            ],
+                                                        Expanded(
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                Text(
+                                                                    user[
+                                                                        'other_details'],
+                                                                    style: const TextStyle(
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            17),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .right),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                              ),
-                                            ]),
-                                            const Divider(
-                                              height: 20,
-                                              thickness: 1,
-                                              indent: 20,
-                                              endIndent: 20,
-                                              color: Color.fromARGB(255, 195, 195, 195),
-                                            ),
-                                            Row(children: [
-                                              Expanded(
-                                                child: Container(
-                                                  child: Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                          ),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          margin:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: const [
-                                                              Text(
-                                                                  'Sharing Employee 2',
-                                                                  style: TextStyle(
-                                                                      color: Color.fromARGB(255, 139, 139, 139),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          17),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                          ),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          margin:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                                  
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                  user['sharing_employee_2'],
-                                                                  style: const TextStyle(
-                                                                      color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              0,
-                                                                              0,
-                                                                              0),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          17),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .right),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ]),
-                                            const Divider(
-                                              height: 20,
-                                              thickness: 1,
-                                              indent: 20,
-                                              endIndent: 20,
-                                              color: Color.fromARGB(255, 195, 195, 195),
-                                            ),
-                                            Row(children: [
-                                              Expanded(
-                                                child: Container(
-                                                  child: Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                          ),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          margin:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: const [
-                                                              Text(
-                                                                  'Other Details',
-                                                                  style: TextStyle(
-                                                                      color: Color.fromARGB(255, 139, 139, 139),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          17),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                          ),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          margin:
-                                                              const EdgeInsets
-                                                                      .all(10),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(user['other_details'],
-                                                                  style: const TextStyle(
-                                                                      color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              0,
-                                                                              0,
-                                                                              0),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          17),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .right),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      
-                                                    ],
-                                                    
-                                                  ),
-                                                ),
-                                                
-                                              )
-                                              
-                                            ]),
-                                            const Padding(padding: EdgeInsets.only(bottom: 10)),
-                                          ],
+                                                )
+                                              ]),
+                                              const Padding(
+                                                  padding: EdgeInsets.only(
+                                                      bottom: 10)),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    const Padding(padding: EdgeInsets.only(bottom: 650)),
-                                  ]),
+                                      const Padding(
+                                          padding:
+                                              EdgeInsets.only(bottom: 650)),
+                                    ]),
                                 ],
                               )
                             ],
@@ -1555,8 +2932,6 @@ class _MobileViewState extends State<MobileView> {
           ],
         ));
   }
-
-
 
   List<DataColumn> getColumns(List<String> columns) {
     return columns
