@@ -61,7 +61,7 @@ class expenseClaimRow extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 20),
                           ),
                           Expanded(
-                            child: Text(request.expenseClaimID,
+                            child: Text((request['expense_claim_id'] ?? 'N/A' ),
                                 style:
                                     TextStyle(color: Colors.blue, fontSize: 12),
                                 textAlign: TextAlign.left),

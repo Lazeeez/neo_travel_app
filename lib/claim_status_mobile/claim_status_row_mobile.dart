@@ -9,6 +9,7 @@ import 'claim_status_data.dart';
 // create a class that accepts a List and print it
 class claimStatusRowMobile extends StatelessWidget {
   var request;
+  var expenseClaim;
   List users = allUsers;
 
   claimStatusRowMobile(this.request, {super.key});
@@ -20,7 +21,48 @@ class claimStatusRowMobile extends StatelessWidget {
     return result.toString();
   }
 
+  String dateFormatter(date) {
+    if (date == null) {
+      return '';
+    }
+    var formatter = new DateFormat('yMMMd');
+    var formattedDate = formatter.format(DateTime.parse(date));
+    return formattedDate;
+  }
+
+  String getDay(date) {
+    if (date != null) {
+      var day = (DateFormat('E').format(DateTime.parse(date))).toString();
+      return day;
+    }
+    else {
+      return '';
+    }
+  }
+
+  String getDaysinBetween(from_date, to_date) {
+    if (from_date != null && to_date != null) {
+      var days = daysBetween((DateTime.parse(from_date)), (DateTime.parse(to_date)));
+      return days;
+    }
+    else {
+      return '';
+    }
+  }
+
+  String dope() {
+    var test_date = '10/10/2021';
+    var rq = "${DateFormat('yMMMd').format(DateTime.parse(request['from_date'])).toString()??''} - ${DateFormat('yMMMd').format(DateTime.parse(request?['to_date']))}";
+    print(rq);
+    return rq;
+  }
+
+  Beta() {
+    print(request);
+  }
+  
   @override
+  
   Widget build(BuildContext context) {
     return Material( child: Row(
       children: [
@@ -64,6 +106,7 @@ class claimStatusRowMobile extends StatelessWidget {
                               children: [
                                 ElevatedButton(
                                   onPressed: () {
+                                    // dope();
                                     showOverlay((context, t) {
                                       // add padding
                                       return Padding(
@@ -195,6 +238,7 @@ class claimStatusRowMobile extends StatelessWidget {
                                                             Column(
                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                               children: [
+                                                                
                                                                 DefaultTextStyle(
                                                                   style: TextStyle(
                                                                       color: Colors
@@ -213,7 +257,7 @@ class claimStatusRowMobile extends StatelessWidget {
                                                                                 left: 10,
                                                                                 top: 10,
                                                                                 bottom: 5),
-                                                                            child: Text(request.from_city,
+                                                                            child: Text(request['from_city'] ?? 'N/A',
                                                                                 style: TextStyle(
                                                                                     color: Color.fromARGB(
                                                                                         255, 0, 0, 0),
@@ -221,14 +265,14 @@ class claimStatusRowMobile extends StatelessWidget {
                                                                                 textAlign: TextAlign.left),
                                                                           ),
                                                                         ),
-                                                                        if (request.to_city != '')
+                                                                        if (request['to_city'] != '')
                                                                         WidgetSpan(
                                                                           child: Container(
                                                                             padding: const EdgeInsets.only(
                                                                                 
                                                                                 top: 10,
                                                                                 bottom: 5),
-                                                                            child: Text(" - " + request.to_city,
+                                                                            child: Text(" - " + (request['to_city'] ?? 'N/A'),
                                                                                 style: TextStyle(
                                                                                     color: Color.fromARGB(
                                                                                         255, 0, 0, 0),
@@ -259,7 +303,7 @@ class claimStatusRowMobile extends StatelessWidget {
                                                                                 
                                                                                 left: 10),
                                                                             child: Text(
-                                                                                "${DateFormat('yMMMd').format(DateTime.parse(request.fromDate))} - ${DateFormat('yMMMd').format(DateTime.parse(request.toDate))}",
+                                                                                dateFormatter(request['from_date']) + ' - ' + dateFormatter(request['to_date']),
                                                                                 style: const TextStyle(
                                                                                     color: Colors.black,
                                                                                     fontWeight:
@@ -272,7 +316,7 @@ class claimStatusRowMobile extends StatelessWidget {
                                                                           child: Container(
                                                                             
                                                                             child: Text(
-                                                                                "(${DateFormat('E').format(DateTime.parse(request.fromDate))} - ${DateFormat('E').format(DateTime.parse(request.toDate))})",
+                                                                                "(${DateFormat('E').format(DateTime.parse(request['from_date']))} - ${DateFormat('E').format(DateTime.parse(request['to_date']))})",
                                                                                 style: const TextStyle(
                                                                                     color: Colors.black,
                                                                                     fontSize: 12),
@@ -321,8 +365,8 @@ class claimStatusRowMobile extends StatelessWidget {
                                                                     right: 250)
                                                         ),
 
-                                                        for (var request in users)
-                                                          expenseClaimRow(request)
+                                                        // for (var request in _postsJson)
+                                                        //   expenseClaimRow(request)
                                                       ],
                                                     ))),
                                               )));
@@ -338,7 +382,7 @@ class claimStatusRowMobile extends StatelessWidget {
                                       const Padding(
                                           padding: EdgeInsets.only(
                                               top: 25, bottom: 25)),
-                                      Text(request.expenseClaimID,
+                                      Text(request['expense_claim_id'],
                                           style: const TextStyle(
                                               color: Colors.blue, fontSize: 12),
                                           textAlign: TextAlign.right),
@@ -348,88 +392,92 @@ class claimStatusRowMobile extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(250, 250, 250, 255),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
+                          // Container(
+                          //   decoration: BoxDecoration(
+                          //     color: const Color.fromARGB(250, 250, 250, 255),
+                          //     borderRadius: BorderRadius.circular(8),
+                          //   ),
+                          //   child: Column(
+                          //     crossAxisAlignment: CrossAxisAlignment.end,
+                          //     children: [
+                          //       ElevatedButton(
+                          //         onPressed: () {
 
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => MobileView(title: request.travelAndLodgingID)),
-                                    );
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      // disable shadows
-                                      shadowColor: Colors.transparent,
-                                      backgroundColor: const Color.fromARGB(
-                                          250, 250, 250, 255)),
-                                  child: Row(
-                                    children: [
-                                      const Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 25, bottom: 25)),
-                                      Text(request.travelAndLodgingID,
-                                          style: const TextStyle(
-                                              color: Colors.blue, fontSize: 12),
-                                          textAlign: TextAlign.right),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          //           Navigator.push(
+                          //             context,
+                          //             MaterialPageRoute(
+                          //                 builder: (context) => MobileView(title: request['lodging_parent'])),
+                          //           );
+                          //         },
+                          //         style: ElevatedButton.styleFrom(
+                          //             // disable shadows
+                          //             shadowColor: Colors.transparent,
+                          //             backgroundColor: const Color.fromARGB(
+                          //                 250, 250, 250, 255)),
+                          //         child: Row(
+                          //           children: [
+                          //             const Padding(
+                          //                 padding: EdgeInsets.only(
+                          //                     top: 25, bottom: 25)),
+                          //             Text(request['lodging_parent'],
+                          //                 style: const TextStyle(
+                          //                     color: Colors.blue, fontSize: 12),
+                          //                 textAlign: TextAlign.right),
+                          //           ],
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
                         ],
                       ),
                       Row(
                         children: [
+                          Padding(padding: const EdgeInsets.only(left: 20)),
                           Container(
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(250, 250, 250, 255),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            // padding:
-                            //     const EdgeInsets.only(
-                            //         left: 45,
-                            //         top: 10),
-                            margin: const EdgeInsets.only(left: 20),
-                            child: Column(
+                            // decoration: BoxDecoration(
+                            //   color: const Color.fromARGB(250, 250, 250, 255),
+                            //   borderRadius: BorderRadius.circular(8),
+                            // ),
+                            // padding: const EdgeInsets.only(left: 20),
+
+                          
+                          child: Expanded(child: 
+                          
+                        Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 RichText(
                                   text: TextSpan(
                                     children: [
+                                      if (request['intracity_check'] == true)
                                       WidgetSpan(
                                         child: Container(
-                                          child: Text(request.from_city,
+                                          child: Text(request['intracity_travel_from'],
                                               style: const TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 28),
                                               textAlign: TextAlign.left),
                                         ),
                                       ),
-                                      if (request.to_city != '')
-                                      WidgetSpan(
-                                        child: Container(
-                                          child: Text(' - ' + request.to_city,
-                                              style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 28),
-                                              textAlign: TextAlign.left),
-                                        ),
-                                      ),
+                                      // if (request['intracity_check'] == false)
+                                      // WidgetSpan(
+                                      //   child: Container(
+                                      //     child: Text(' - ' + request['intracity_travel_to'],
+                                      //         style: const TextStyle(
+                                      //             color: Colors.black,
+                                      //             fontSize: 28),
+                                      //         textAlign: TextAlign.left),
+                                      //   ),
+                                      // ),
                                     ],
                                   ),
                                 ),
                               ],
                             ),
+                          )
                           ),
+                          Padding(padding: const EdgeInsets.only(right: 20)),
                         ],
                       ),
                       Row(
@@ -466,7 +514,7 @@ class claimStatusRowMobile extends StatelessWidget {
                                         child: Container(
                                           padding:
                                               const EdgeInsets.only(bottom: 10),
-                                          child: Text(request.status,
+                                          child: Text(request['workflow_state'],
                                               style: const TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 187, 149, 109),
@@ -517,7 +565,7 @@ class claimStatusRowMobile extends StatelessWidget {
                                             250, 250, 250, 255),
                                         padding: const EdgeInsets.only(
                                             right: 20, top: 10, bottom: 5),
-                                        child: Text("₹" + request.claimAmount,
+                                        child: Text("₹" + request['total_claimed_amount'].toString(),
                                             style: const TextStyle(
                                                 color: Color.fromARGB(
                                                     255, 0, 0, 0),
@@ -575,7 +623,7 @@ class claimStatusRowMobile extends StatelessWidget {
                                         padding: const EdgeInsets.only(
                                             right: 20, top: 10, bottom: 5),
                                         child: Text(
-                                            "₹" + request.totalSanctionedAmount,
+                                            "₹" + request['total_sanctioned_amount'].toString(),
                                             style: const TextStyle(
                                                 color: Color.fromARGB(
                                                     255, 0, 0, 0),
@@ -634,7 +682,7 @@ class claimStatusRowMobile extends StatelessWidget {
                                         padding: const EdgeInsets.only(
                                             right: 20, top: 10, bottom: 5),
                                         child: Text(
-                                            "₹" + request.amountToBeReimbursed,
+                                            "₹" + request['outstanding_amount_to_be_reimbursed'].toString(),
                                             style: const TextStyle(
                                                 color: Color.fromARGB(
                                                     255, 0, 0, 0),
@@ -673,7 +721,7 @@ class claimStatusRowMobile extends StatelessWidget {
                         //     Column (
                         //       children: [
 
-                        if (request.claimType == "Lodging")
+                        if (request['intracity_check'] == false)
                         Container(
                           padding: const EdgeInsets.only(
                               left: 14, top: 0, right: 10),
@@ -739,7 +787,9 @@ class claimStatusRowMobile extends StatelessWidget {
                                                   bottom: 5,
                                                   top: 13),
                                               child: Text(
-                                                  "${DateFormat('yMMMd').format(DateTime.parse(request.fromDate))} - ${DateFormat('yMMMd').format(DateTime.parse(request.toDate))}",
+                                                (request['from_date'] ?? 'No from date') + ' - ' + (request['to_date'] ?? 'No to date'),
+                                                // request['from_city'] ?? "",
+                                                  // "${DateFormat('yMMMd').format(DateTime.parse(request['from_date']))?.toString()??''} - ${DateFormat('yMMMd').format(DateTime.parse(request?['to_date']))?.toString()??''}",
                                                   style: const TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
@@ -755,7 +805,12 @@ class claimStatusRowMobile extends StatelessWidget {
                                                   right: 25,
                                                   bottom: 5),
                                               child: Text(
-                                                  "(${DateFormat('E').format(DateTime.parse(request.fromDate))} - ${DateFormat('E').format(DateTime.parse(request.toDate))})",
+                                                // request['from_date'] ?? "",
+                                                // handle null safety of request['from_date'] and format it to whatever day it was at that
+                                                
+                                                (getDay(request['from_date'])) + ' - ' + (getDay(request['to_date'])),
+                                                // "${DateFormat('yMMMd').format(DateTime.parse(request['from_date']))?.toString()??''} - ${DateFormat('yMMMd').format(DateTime.parse(request?['to_date']))?.toString()??''}",
+                                                  // (DateFormat('E').format(DateTime.parse((request['from_date']) ?? DateTime.parse((01/01/2022)))) ?? 'No From Date' + ' - ' + (DateFormat('E').format(DateTime.parse(request['to_date']))) ?? 'No To Date'),
                                                   style: const TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 12),
@@ -773,7 +828,8 @@ class claimStatusRowMobile extends StatelessWidget {
                                               padding: const EdgeInsets.only(
                                                   bottom: 8, left: 10),
                                               child: Text(
-                                                  "${daysBetween((DateTime.parse(request.fromDate)), (DateTime.parse(request.toDate)))} days",
+                                                getDaysinBetween(request['from_date'], request['to_date']) + ' Days',
+                                                  // "${daysBetween((DateTime.parse(request['from_date'])), (DateTime.parse(request['to_date'])))} days",
                                                   style: const TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 12),
@@ -790,7 +846,7 @@ class claimStatusRowMobile extends StatelessWidget {
                           ),
                         ),
 
-                        if (request.claimType == "Travel")
+                        if (request['intracity_check'] == false)
                         Container(
                           padding: const EdgeInsets.only(
                               left: 14, top: 0, right: 10),
@@ -856,7 +912,7 @@ class claimStatusRowMobile extends StatelessWidget {
                                                   bottom: 5,
                                                   top: 13),
                                               child: Text(
-                                                  "${DateFormat('yMMMd').format(DateTime.parse(request.fromDate))} - ${DateFormat('yMMMd').format(DateTime.parse(request.toDate))}",
+                                                  dateFormatter(request['from_date']) + ' - ' + dateFormatter(request['to_date']),
                                                   style: const TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
@@ -872,7 +928,7 @@ class claimStatusRowMobile extends StatelessWidget {
                                                   right: 25,
                                                   bottom: 5),
                                               child: Text(
-                                                  "(${DateFormat('E').format(DateTime.parse(request.fromDate))} - ${DateFormat('E').format(DateTime.parse(request.toDate))})",
+                                                  getDay(request['from_date']) + ' - ' + getDay(request['to_date']),
                                                   style: const TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 12),
@@ -890,7 +946,7 @@ class claimStatusRowMobile extends StatelessWidget {
                                               padding: const EdgeInsets.only(
                                                   bottom: 8, left: 10),
                                               child: Text(
-                                                  "${daysBetween((DateTime.parse(request.fromDate)), (DateTime.parse(request.toDate)))} days",
+                                                  getDaysinBetween(request['from_date'], request['to_date']) + ' Days',
                                                   style: const TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 12),

@@ -1,11 +1,14 @@
 // create a screen
 import 'package:flutter/material.dart';
 // import 'claim_status_screen.dart';
-import 'claim_status_mobile/claim_status_mobile.dart';
+import 'claim_status_desktop/claim_status_screen.dart';
 // import 'testsupport.dart';
 // import 'saved_claims_screen.dart';
 // import 'test.dart';
 import 'package:overlay_support/overlay_support.dart';
+
+import 'claim_status_desktop/list_view_desktop.dart';
+// import 'claim_status_mobile/claim_status_mobile.dart';
 
 void main() => runApp(const MyApp());
 
@@ -39,14 +42,14 @@ class _ScreenState extends State<Screen> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return ClaimStatusMobile(title: 'Claim Status');
+        // return ClaimStatus(title: 'Claim Status');
         // return Home();
-        // return MobileView(title: 'mobile');
-        // if (constraints.maxWidth > 800) {
+        return DesktopView(title: 'desktop');
+        // if (constraints.maxWidth > 1050) {
           
-        //   return DesktopView(title: 'desktop');
+        //   return ClaimStatus(title: 'desktop');
         // } else {
-        //   return MobileView(title: 'mobile');
+        //   return ClaimStatus(title: 'mobile');
         // }
       },
     );

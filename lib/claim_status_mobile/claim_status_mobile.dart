@@ -4,6 +4,10 @@ import 'saved_claims_row_mobile.dart';
 import 'claim_status_row_mobile.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'expense_claims_row_mobile.dart';
+// import 'package:neo_travel_app/doha_data.dart';
+import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
+import 'dart:convert';
 
 void main() => runApp(const MyApp());
 
@@ -38,61 +42,125 @@ class _ClaimStatusMobileState extends State<ClaimStatusMobile>
   List Rejected_requests = [];
   List Original_users = allUsers;
   var active_filter = 'All';
+  // var findata =   dohadata();
+  var _postsJson = [];
 
-  @override
-  initState() {
-    super.initState();
+  var all_requests;
+  var approved_requests;
+  var pending_requests;
+  var rejected_requests;
+
+  // convert future dynamic to list dynamic
+  
+  // final Future<List> database = claimStatusListData().then((List data) {
+  //   return data;
+  // });
+  
+  // get data => database;
+
+
+  // var finData = await claimStatusListData() as List;
+
+  // @override
+  // initState() {
+  //   super.initState();
+  //   setState(() {
+  //     // findata = claimStatusListData();
+  //     // for (var i = 0; i < users.length; i++) {
+  //     //   if (users[i].status == 'Approved') {
+  //     //     Approved_requests.add(users[i]);
+  //     //   } else if (users[i].status == 'Pending') {
+  //     //     Pending_requests.add(users[i]);
+  //     //   } else if (users[i].status == 'Rejected') {
+  //     //     Rejected_requests.add(users[i]);
+  //     //   }
+  //     // }
+  //   });
+  // }
+
+
+  claimStatusListData() async {
+
+    // header to be passing the http client
+    var header = {
+      "Content-Type": "application/json",
+      "Authorization": "token 9042748af9f0690:48c7e8935ed9126"
+    };
+    var client = http.Client();
+
+    // secret 2deb5e95bee97ce
+    // key 9042748af9f0690
+
+    var url2 = Uri.parse('https://doha-matrix.elasticrun.in/api/method/matrix.api.travel_management.claim_details?employee=EMP-01424');
+
+    var url = Uri.parse(
+        'https://doha-matrix.elasticrun.in/api/method/matrix.api.travel_management.claim_count_for_dashboard?employee=EMP-01424');
+
+    // var url = Uri.parse('https://doha-matrix.elasticrun.in/api/resource/Travel%20and%20Lodging%20Request/TL/EMP-0264/Dec21/0012');
+
+    var response = await client.get(url2, headers: header);
+    var response2 = await client.get(url, headers: header);
+    // print(response.body);
+
+    // json decode to convert the response to json
+    var result = (jsonDecode(response.body));
+    var count = (jsonDecode(response2.body));
+
+    print(result);
+    print(count);
+  
+    // return result;
+    // print(result['message']);
     setState(() {
-      for (var i = 0; i < users.length; i++) {
-        if (users[i].status == 'Approved') {
-          Approved_requests.add(users[i]);
-        } else if (users[i].status == 'Pending') {
-          Pending_requests.add(users[i]);
-        } else if (users[i].status == 'Rejected') {
-          Rejected_requests.add(users[i]);
-        }
-      }
+      _postsJson = result['message'];
+      all_requests = count['message']['total_count'];
+      approved_requests = count['message']['approved_count'];
+      pending_requests = count['message']['pending_count'];
+      rejected_requests = count['message']['rejected_count'];
     });
+    
   }
+
+  
 
   // calculate requests of status approved from allUsers
-  String approvedRequests() {
-    int approved = 0;
-    for (var i = 0; i < Original_users.length; i++) {
-      if (Original_users[i].statusSimple == 'Approved') {
-        approved++;
-      }
-    }
-    return approved.toString();
-  }
+  // String approvedRequests() {
+  //   int approved = 0;
+  //   for (var i = 0; i < Original_users.length; i++) {
+  //     if (Original_users[i].statusSimple == 'Approved') {
+  //       approved++;
+  //     }
+  //   }
+  //   return approved.toString();
+  // }
 
-  String pendingRequests() {
-    int approved = 0;
-    for (var i = 0; i < Original_users.length; i++) {
-      if (Original_users[i].statusSimple == 'Pending') {
-        approved++;
-      }
-    }
-    return approved.toString();
-  }
+  // String pendingRequests() {
+  //   int approved = 0;
+  //   for (var i = 0; i < Original_users.length; i++) {
+  //     if (Original_users[i].statusSimple == 'Pending') {
+  //       approved++;
+  //     }
+  //   }
+  //   return approved.toString();
+  // }
 
-  String rejectedRequests() {
-    int approved = 0;
-    for (var i = 0; i < Original_users.length; i++) {
-      if (Original_users[i].statusSimple == 'Rejected') {
-        approved++;
-      }
-    }
-    return approved.toString();
-  }
+  // String rejectedRequests() {
+  //   int approved = 0;
+  //   for (var i = 0; i < Original_users.length; i++) {
+  //     if (Original_users[i].statusSimple == 'Rejected') {
+  //       approved++;
+  //     }
+  //   }
+  //   return approved.toString();
+  // }
 
-  String allRequests() {
-    int requests = 0;
-    for (var i = 0; i < Original_users.length; i++) {
-      requests++;
-    }
-    return requests.toString();
-  }
+  // String allRequests() {
+  //   int requests = 0;
+  //   for (var i = 0; i < Original_users.length; i++) {
+  //     requests++;
+  //   }
+  //   return requests.toString();
+  // }
 
   final columns = [
     'Lodging Request Status',
@@ -115,6 +183,14 @@ class _ClaimStatusMobileState extends State<ClaimStatusMobile>
     'Separated',
     'Other'
   ];
+
+  @override
+  initState() {
+    super.initState();
+    setState(() {
+      claimStatusListData();
+    });
+  }
 
   Size get size => MediaQuery.of(context).size;
 
@@ -337,7 +413,7 @@ class _ClaimStatusMobileState extends State<ClaimStatusMobile>
                                   padding: const EdgeInsets.only(
                                       left: 7, right: 5),
                                   child: Text(
-                                    allRequests(),
+                                    all_requests.toString(),
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 12,
@@ -368,7 +444,7 @@ class _ClaimStatusMobileState extends State<ClaimStatusMobile>
                               padding:
                                   const EdgeInsets.only(left: 7, right: 5),
                               child: Text(
-                                pendingRequests(),
+                                pending_requests.toString(),
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,
@@ -399,7 +475,7 @@ class _ClaimStatusMobileState extends State<ClaimStatusMobile>
                               padding:
                                   const EdgeInsets.only(left: 6, right: 5),
                               child: Text(
-                                rejectedRequests(),
+                                rejected_requests.toString(),
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,
@@ -430,7 +506,7 @@ class _ClaimStatusMobileState extends State<ClaimStatusMobile>
                               padding:
                                   const EdgeInsets.only(left: 6, right: 5),
                               child: Text(
-                                approvedRequests(),
+                                approved_requests.toString(),
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,
@@ -447,29 +523,29 @@ class _ClaimStatusMobileState extends State<ClaimStatusMobile>
                           SingleChildScrollView(
                               child: Column(
                             children: [
-                              for (var test in allUsers)
-                                claimStatusRowMobile(test)
+                              for (var request in _postsJson)
+                                claimStatusRowMobile(request)
                             ],
                           )),
                           SingleChildScrollView(
                               child: Column(
                             children: [
-                              for (var test in Pending_requests)
-                                claimStatusRowMobile(test)
+                              for (var request in _postsJson)
+                                claimStatusRowMobile(request)
                             ],
                           )),
                           SingleChildScrollView(
                               child: Column(
                             children: [
-                              for (var test in Rejected_requests)
-                                claimStatusRowMobile(test)
+                              for (var request in _postsJson)
+                                claimStatusRowMobile(request)
                             ],
                           )),
                           SingleChildScrollView(
                               child: Column(
                             children: [
-                              for (var test in Approved_requests)
-                                claimStatusRowMobile(test)
+                              for (var request in _postsJson)
+                                claimStatusRowMobile(request)
                             ],
                           )
                         ),

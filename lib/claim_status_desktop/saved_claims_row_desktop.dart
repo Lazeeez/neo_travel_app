@@ -10,13 +10,6 @@ class savedClaimRow extends StatelessWidget {
 
   savedClaimRow(this.request, {super.key});
 
-  String daysBetween(DateTime from, DateTime to) {
-    from = DateTime(from.year, from.month, from.day);
-    to = DateTime(to.year, to.month, to.day);
-    var result = (to.difference(from).inHours / 24).round();
-    return result.toString();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -438,7 +431,8 @@ class savedClaimRow extends StatelessWidget {
                                   )
 
                                 ],
-                              ))
+                              )
+                            )
                         ],
                       ),
                     ],

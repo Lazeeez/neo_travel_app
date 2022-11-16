@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+// import 'package:http/http.dart';
 import '../data.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 class MobileView extends StatefulWidget {
   final String title;
@@ -26,13 +28,17 @@ initState() {
 
 class _MobileViewState extends State<MobileView> {
   var _postsJson = [];
+  var nasty = [];
 
   fetchAlbumWithoutAwait() async {
     var header = {
       "Content-Type": "application/json",
-      "Authorization": "token bfc3d0749b9c2ec:3d2986856cca23b"
+      "Authorization": "token 9042748af9f0690:2deb5e95bee97ce"
     };
     var client = http.Client();
+
+    // secret 2deb5e95bee97ce
+    // key 9042748af9f0690
 
     var url = Uri.parse(
         'https://doha-matrix.elasticrun.in/api/method/matrix.api.angular_backend.get_completed_trips?fields=%5B%22*%22%5D&filters=%5B%5D&order_by=modified%20desc&limit_start=0&limit_page_length=5&employee=EMP-0264&doctype=Travel%20and%20Lodging%20Request');
@@ -50,10 +56,62 @@ class _MobileViewState extends State<MobileView> {
     });
   }
 
+
+    dest() async {
+    var header = {
+      "Content-Type": "application/json",
+      "Authorization": "token 9042748af9f0690:2deb5e95bee97ce"
+    };
+    var client = http.Client();
+
+    // secret 2deb5e95bee97ce
+    // key 9042748af9f0690
+
+    var url = Uri.parse(
+        'https://doha-matrix.elasticrun.in/api/method/matrix.api.travel_management.claim_count_for_dashboard?employee=EMP-01424');
+
+    // var url = Uri.parse('https://doha-matrix.elasticrun.in/api/resource/Travel%20and%20Lodging%20Request/TL/EMP-0264/Dec21/0012');
+
+    var response = await client.get(url, headers: header);
+    // print(response.body);
+    var result = (jsonDecode(response.body));
+
+    print(result['message']);
+
+  }
+
+
+
+  final Dio _dio = Dio();
+  final accessToken = '9042748af9f0690:2deb5e95bee97ce';
+
+  Future<dynamic> getUserProfileData() async {
+    try {
+      Response response = await _dio.get(
+        'https://doha-matrix.elasticrun.in/api/method/matrix.api.travel_management.claim_count_for_dashboard',
+        
+        options: Options(
+          headers: {'Authorization': 'token 9042748af9f0690:2deb5e95bee97ce'},
+        ),
+      );
+      print("trap");
+      print(response.data);
+      print("crap");
+      // var response = await client.get(url, headers: header);
+    // print(jsonDecode(response.body));
+      var result = (jsonDecode(response.data));
+      return response.data;
+    } on DioError catch (e) {
+      print(e.response!.statusCode);
+      print("Failed to Load Data");
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     fetchAlbumWithoutAwait();
+    getUserProfileData();
   }
 
   var travel_and_lodging_id = 'TL/EMP-0264/Sep20/0017';
@@ -185,7 +243,11 @@ class _MobileViewState extends State<MobileView> {
                                   // add button to the right
                                   ElevatedButton(
                                     onPressed: () {
-                                      print(_postsJson);
+                                      var bully = dest();
+                                      print("tripy");
+                                      print(bully);
+                                      print("nasty");
+                                      // print(_postsJson);
                                     },
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: const Color.fromARGB(

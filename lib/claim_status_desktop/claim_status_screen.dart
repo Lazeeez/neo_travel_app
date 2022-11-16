@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../claim_status_mobile/claim_status_data.dart';
 import 'package:intl/intl.dart';
-import '../claim_status_mobile/claim_status_mobile.dart';
+import 'package:overlay_support/overlay_support.dart';
+// import '../claim_status_mobile/claim_status_mobile.dart';
 // import 'utils.dart';
 
 void main() => runApp(const MyApp());
@@ -36,45 +37,45 @@ class _ClaimStatusState extends State<ClaimStatus> {
   
 
   // calculate requests of status approved from allUsers
- String approvedRequests() {
-    int approved = 0;
-    for (var i = 0; i < Original_users.length; i++) {
-      if (Original_users[i].statusSimple == 'Approved') {
-        approved++;
-      }
-    }
-    return approved.toString();
-  }
+//  String approvedRequests() {
+//     int approved = 0;
+//     for (var i = 0; i < Original_users.length; i++) {
+//       if (Original_users[i].statusSimple == 'Approved') {
+//         approved++;
+//       }
+//     }
+//     return approved.toString();
+//   }
 
-  String pendingRequests() {
-    int approved = 0;
-    for (var i = 0; i < Original_users.length; i++) {
-      if (Original_users[i].statusSimple == 'Pending') {
-        approved++;
-      }
-    }
-    return approved.toString();
-  }
+//   String pendingRequests() {
+//     int approved = 0;
+//     for (var i = 0; i < Original_users.length; i++) {
+//       if (Original_users[i].statusSimple == 'Pending') {
+//         approved++;
+//       }
+//     }
+//     return approved.toString();
+//   }
 
-  String rejectedRequests() {
-    int approved = 0;
-    for (var i = 0; i < Original_users.length; i++) {
-      if (Original_users[i].statusSimple == 'Rejected') {
-        approved++;
-      }
-    }
-    return approved.toString();
-  }  
+//   String rejectedRequests() {
+//     int approved = 0;
+//     for (var i = 0; i < Original_users.length; i++) {
+//       if (Original_users[i].statusSimple == 'Rejected') {
+//         approved++;
+//       }
+//     }
+//     return approved.toString();
+//   }  
 
-  String allRequests() {
-    int requests = 0;
-    for (var i = 0; i < Original_users.length; i++) {
+//   String allRequests() {
+//     int requests = 0;
+//     for (var i = 0; i < Original_users.length; i++) {
      
-      requests++;
+//       requests++;
       
-    }
-    return requests.toString();
-  } 
+//     }
+//     return requests.toString();
+//   } 
 
   final columns = [
     'Lodging Request Status',
@@ -214,7 +215,7 @@ class _ClaimStatusState extends State<ClaimStatus> {
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                             ),
-                                            child: Text(allRequests(),
+                                            child: Text('1',
                                                 style: TextStyle(
                                                   // color: Color(0xFFFFFFFF)
                                                     color: Colors.white,
@@ -268,7 +269,7 @@ class _ClaimStatusState extends State<ClaimStatus> {
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                             ),
-                                            child: Text(pendingRequests(),
+                                            child: Text('2',
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 14),
@@ -323,7 +324,7 @@ class _ClaimStatusState extends State<ClaimStatus> {
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                             ),
-                                            child: Text(rejectedRequests(),
+                                            child: Text('3',
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 14),
@@ -377,7 +378,7 @@ class _ClaimStatusState extends State<ClaimStatus> {
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                             ),
-                                            child: Text(approvedRequests(),
+                                            child: Text('4',
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 14),
@@ -412,9 +413,121 @@ class _ClaimStatusState extends State<ClaimStatus> {
                                     ElevatedButton(
                                       onPressed: () {
 
-                                        setState(() {
-                                          users = applyFilter("Saved");
-                                        });
+                                        showOverlay((context, t) {
+                                  // add padding
+                                  return Padding(
+                                      // set padding as much as appbar height
+                                      padding: EdgeInsets.only(
+                                          top: MediaQuery.of(context)
+                                                  .padding
+                                                  .top +
+                                              kToolbarHeight),
+                                      // padding: EdgeInsets.only(
+                                      //     top: screen_height * 0.11),
+                                      // padding: const EdgeInsets.only(top:
+                                      child: Container(
+                                          padding:
+                                              const EdgeInsets.only(left: 70),
+                                          color: Color.lerp(
+                                              Colors.transparent,
+                                              Colors.black54,
+                                              t),
+                                          child: FractionalTranslation(
+                                            translation: Offset.lerp(
+                                                const Offset(1, 0),
+                                                const Offset(0, 0),
+                                                t)!,
+                                            child: Container(
+                                                color: const Color.fromARGB(
+                                                    255, 250, 250, 250),
+                                                child: SingleChildScrollView(
+                                                    child: Column(
+                                                  children: [
+                                                    const Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                right: 220)),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      // crossAxisAlignment: CrossAxisAlignment.center,
+                                                      children: [
+                                                        RichText(
+                                                          text: TextSpan(
+                                                            children: [
+                                                              WidgetSpan(
+                                                                child:
+                                                                    Container(
+                                                                        padding: const EdgeInsets.only(
+                                                                            left:
+                                                                                30,
+                                                                            top:
+                                                                                25),
+                                                                        child:
+                                                                            const DefaultTextStyle(
+                                                                          style: TextStyle(
+                                                                              color: Colors.black,
+                                                                              fontSize: 18,
+                                                                              fontWeight: FontWeight.bold),
+                                                                          child:
+                                                                              Text('Saved Claims', textAlign: TextAlign.left),
+                                                                        )),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  right: 10,
+                                                                  top: 25),
+                                                          child:
+                                                              ElevatedButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                    OverlaySupportEntry.of(
+                                                                            context)!
+                                                                        .dismiss();
+                                                                  },
+                                                                  style: ElevatedButton
+                                                                      .styleFrom(
+                                                                    // disable shadows
+                                                                    shadowColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    backgroundColor: const Color
+                                                                            .fromARGB(
+                                                                        255,
+                                                                        250,
+                                                                        250,
+                                                                        250),
+                                                                  ),
+                                                                  child: const Icon(
+                                                                      Icons
+                                                                          .close,
+                                                                      color: Color.fromRGBO(
+                                                                          124,
+                                                                          128,
+                                                                          134,
+                                                                          1))
+                                                                  // change color
+
+                                                                  ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    const Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                right: 250)),
+                                                    // for (var request in users)
+                                                    //   savedClaimRow(request)
+                                                  ],
+                                                ))),
+                                          )));
+                                        }, duration: Duration.zero);
                                       },
                                       style: ElevatedButton.styleFrom(
                                         shadowColor: Colors.transparent,
@@ -530,7 +643,7 @@ class _ClaimStatusState extends State<ClaimStatus> {
                                                                             .only(left: 45, top: 10, bottom: 10, right: 10),
                                                                     
                                                                     child: Text(
-                                                                        request.expenseClaimID +  "  ·  " +  request.travelAndLodgingID,
+                                                                        request.expense_claim_id +  "  ·  " +  request.lodging_parent,
                                                                         style: TextStyle(
                                                                             color: Color.fromARGB(255, 54, 165, 255),
                                                                             
@@ -603,7 +716,7 @@ class _ClaimStatusState extends State<ClaimStatus> {
                                                                             padding:
                                                                                 EdgeInsets.only(right: 3)),
                                                                         Text(
-                                                                            request.status,
+                                                                            request.workflow_state,
                                                                             style: TextStyle(
                                                                                 color: Color.fromARGB(255, 200, 150, 40),
                                                                                 fontWeight: FontWeight.bold,
@@ -658,7 +771,7 @@ class _ClaimStatusState extends State<ClaimStatus> {
                                                                         bottom:
                                                                             10),
                                                                     child: Text(
-                                                                        request.city,
+                                                                        request.from_city,
                                                                         style: TextStyle(
                                                                             color: Colors
                                                                                 .black,
@@ -798,7 +911,7 @@ class _ClaimStatusState extends State<ClaimStatus> {
                                                                       bottom:
                                                                           10, right: 10),
                                                                   child: Text(
-                                                                      DateFormat('yMMMd').format(DateTime.parse(request.fromDate)) + " - " + DateFormat('yMMMd').format(DateTime.parse(request.toDate)),
+                                                                      DateFormat('yMMMd').format(DateTime.parse(request.from_date)) + " - " + DateFormat('yMMMd').format(DateTime.parse(request.to_date)),
                                                                       style: TextStyle(
                                                                           color: Colors
                                                                               .black,
@@ -819,7 +932,7 @@ class _ClaimStatusState extends State<ClaimStatus> {
                                                                       bottom:
                                                                           10, right: 50),
                                                                   child: Text(
-                                                                      "(" + DateFormat('E').format(DateTime.parse(request.fromDate)) + " - " + DateFormat('E').format(DateTime.parse(request.toDate)) + ")",
+                                                                      "(" + DateFormat('E').format(DateTime.parse(request.from_date)) + " - " + DateFormat('E').format(DateTime.parse(request.to_date)) + ")",
                                                                       style: TextStyle(
                                                                           color: Colors
                                                                               .black,
@@ -844,7 +957,7 @@ class _ClaimStatusState extends State<ClaimStatus> {
                                                     margin:
                                                         const EdgeInsets.only(bottom: 5),
                                                                   child: Text(
-                                                                      daysBetween((DateTime.parse(request.fromDate)), (DateTime.parse(request.toDate))) + " days",
+                                                                      daysBetween((DateTime.parse(request.from_date)), (DateTime.parse(request.to_date))) + " days",
                                                                       style: TextStyle(
                                                                           color: Colors
                                                                               .black,
@@ -954,7 +1067,7 @@ class _ClaimStatusState extends State<ClaimStatus> {
                                                                       bottom:
                                                                           10, right: 10),
                                                                   child: Text(
-                                                                      DateFormat('yMMMd').format(DateTime.parse(request.fromDate)) + " - " + DateFormat('yMMMd').format(DateTime.parse(request.toDate)),
+                                                                      DateFormat('yMMMd').format(DateTime.parse(request.from_date)) + " - " + DateFormat('yMMMd').format(DateTime.parse(request.to_date)),
                                                                       style: TextStyle(
                                                                           color: Colors
                                                                               .black,
@@ -975,7 +1088,7 @@ class _ClaimStatusState extends State<ClaimStatus> {
                                                                       bottom:
                                                                           10, right: 50),
                                                                   child: Text(
-                                                                      "(" + DateFormat('E').format(DateTime.parse(request.fromDate)) + " - " + DateFormat('E').format(DateTime.parse(request.toDate)) + ")",
+                                                                      "(" + DateFormat('E').format(DateTime.parse(request.from_date)) + " - " + DateFormat('E').format(DateTime.parse(request.to_date)) + ")",
                                                                       style: TextStyle(
                                                                           color: Colors
                                                                               .black,
@@ -1000,7 +1113,7 @@ class _ClaimStatusState extends State<ClaimStatus> {
                                                     margin:
                                                         const EdgeInsets.only(bottom: 5),
                                                                   child: Text(
-                                                                      daysBetween((DateTime.parse(request.fromDate)), (DateTime.parse(request.toDate))) + " days",
+                                                                      daysBetween((DateTime.parse(request.from_date)), (DateTime.parse(request.to_date))) + " days",
                                                                       style: TextStyle(
                                                                           color: Colors
                                                                               .black,
@@ -1376,7 +1489,7 @@ class _ClaimStatusState extends State<ClaimStatus> {
       filteredList = allUsers;
     } else {
       for (var user in allUsers) {
-        if (user.statusSimple == active_filter) {
+        if (user.workflow_state_simple == active_filter) {
           filteredList.add(user);
         }
       }
